@@ -1,0 +1,1355 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Creating the payoff matrix &#8212; Basic Bond Concepts of Fixed Icome: Accrued Interest and Bond Payment Data</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Creating_The_Payoff_Matrix';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bootstrapping the term structure with 304 bonds" href="Bootstrapping_The_Term_Structure_With_304_Bonds.html" />
+    <link rel="prev" title="Using the linalg module of NumPy" href="Using_the_linalg_module_of_NumPy.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Basic Bond Concepts of Fixed Icome: Accrued Interest and Bond Payment Data</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Financial Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Interacting%20With%20Jupyter%20Books.html">Working with Jupyter Books</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Concepts of Fixed Income: Chapter Four</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Chapter_Four_Highlights.html">Bootstrapping The Terms Structure With A Few Hundred Bonds</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Inferring_Zero_Prices.html"><strong>Inferring zero prices from the present value function</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Using_the_linalg_module_of_NumPy.html">Using the linalg module of NumPy</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Creating the payoff matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Bootstrapping_The_Term_Structure_With_304_Bonds.html">Bootstrapping the term structure with 304 bonds</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="imported_functions_Four.html">Function Imported by Chapter Four.</a></li>
+</ul><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/PatrickJHess/Vol-3-Chap-4/master?urlpath=tree/Creating_The_Payoff_Matrix.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/PatrickJHess/Vol-3-Chap-4/blob/master/Creating_The_Payoff_Matrix.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<a href="https://github.com/PatrickJHess/Vol-3-Chap-4/issues/new?title=Issue%20on%20page%20%2FCreating_The_Payoff_Matrix.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button"
+   title="Open an issue"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Creating_The_Payoff_Matrix.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Creating the payoff matrix</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-unique-payoff-dates-for-a-sample-of-bonds">Find unique payoff dates for a sample of bonds</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries-modules-and-functions">Importing libraries, modules, and functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-custom-module-and-importing-functions">Adding a custom module and importing functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-custom-module-module-basic-concepts-fixed-income-custom-module-is-accessed-from-dropbox-and-named-basic-concepts-fixed-income-three-functions-are-imported">The custom module <font color="green">module_basic_concepts_fixed_income</font> custom module  is accessed from Dropbox and named <font color="green">basic_concepts_fixed_income</font>. Three functions are imported:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-sample-bonds">Getting the sample bonds</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-payments-of-the-eleven-bonds">Getting the payments of the eleven bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-unique-payment-dates-of-the-eleven-bonds">Determining the unique payment dates of the eleven bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-set-comprehension-to-create-a-set-of-unique-payment-dates">Use set comprehension to create a set of unique payment dates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-unique-pay-dates">The function <font color="green">unique_pay_dates</font></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-unique-payment-dates-for-four-bonds"><font color="green">Application: Determine unique payment dates for four bonds</font></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrate-creating-a-row-with-february-28-th-2026-0-5-coupon-bond">Illustrate creating a row with February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 0.5 coupon bond.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-row-for-the-bond">Create the row for the bond</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-create-payoff-matrix">The function <font color="green">create_payoff_matrix</font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-create-payoff-matrix-function-is-demonstrated-with-the-eleven-bonds-of-the-sample-bonds-dataframe">The <font color="green">create_payoff_matrix</font> function is demonstrated with the eleven bonds of the <font color="green">sample_bonds</font> DataFrame.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-the-payoff-matrix-for-four-bonds"><font color="green">Application: Determine the payoff matrix for four bonds</font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-is-the-payoff-matrix-full-column-rank"><font color="green">Application: Is the payoff matrix full column rank?</font></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="creating-the-payoff-matrix">
+<h1>Creating the payoff matrix<a class="headerlink" href="#creating-the-payoff-matrix" title="Link to this heading">#</a></h1>
+<section id="find-unique-payoff-dates-for-a-sample-of-bonds">
+<h2>Find unique payoff dates for a sample of bonds<a class="headerlink" href="#find-unique-payoff-dates-for-a-sample-of-bonds" title="Link to this heading">#</a></h2>
+<p>To accurately estimate the term structure of interest rates using coupon bonds, the first step is to identify the unique payment dates for the bonds. These dates will form the columns of the payoff matrix. The rows of the matrix will represent the individual bonds, and the cell values will be the payment amount of the corresponding bond on that specific date.</p>
+<p>To demonstrate, we will use an Excel workbook named bond_data_jan21_2025.xlsx from DropBox. The payoff matrix will be constructed using all bonds that mature on the following dates</p>
+<ul class="simple">
+<li><p>February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2025</p></li>
+<li><p>July 15<span class="math notranslate nohighlight">\(^{th}\)</span> 2025</p></li>
+<li><p>August 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2025</p></li>
+<li><p>January 15<span class="math notranslate nohighlight">\(^{th}\)</span> 2026</p></li>
+<li><p>February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026</p></li>
+</ul>
+<p>The settlement date is January 21<span class="math notranslate nohighlight">\(^{st}\)</span> 2025.</p>
+<section id="importing-libraries-modules-and-functions">
+<h3>Importing libraries, modules, and functions<a class="headerlink" href="#importing-libraries-modules-and-functions" title="Link to this heading">#</a></h3>
+<p>As in earlier chapters of the volume, modules that are included in the standard Python library are imported. When necessary, other modules or libraries are installed before they are imported.<span class="math notranslate nohighlight">\(^{1}\)</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>import sys
+import requests
+from types import ModuleType
+from datetime import datetime, date
+
+try:
+    import numpy as np
+except:
+    !pip install numpy
+    import numpy as np
+
+try:
+    import pandas as pd
+except:
+    !pip install pandas
+    import pandas as pd
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><span class="math notranslate nohighlight">\(^{1}\)</span>For more information on <font color='green'>try</font> and <font color='green'>except</font> statements, see “<a href='https://patrickjhess.github.io/Introduction-To-Python-For-Financial-Python/Control_Statements.html#the-try-and-except'>Control Statements</a>.”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import OS to interact with local computer operating system</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModuleType</span>
+<span class="c1"># Import the datetime and date classes from the datetime module</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span>
+
+<span class="c1"># Import the NumPy library for numerical operations, commonly aliased as np.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>numpy
+    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Import the pandas library for data manipulation and analysis, aliased as pd.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pandas
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="adding-a-custom-module-and-importing-functions">
+<h3>Adding a custom module and importing functions<a class="headerlink" href="#adding-a-custom-module-and-importing-functions" title="Link to this heading">#</a></h3>
+<section id="the-custom-module-module-basic-concepts-fixed-income-custom-module-is-accessed-from-dropbox-and-named-basic-concepts-fixed-income-three-functions-are-imported">
+<h4>The custom module <font color='green'>module_basic_concepts_fixed_income</font> custom module  is accessed from Dropbox and named <font color='green'>basic_concepts_fixed_income</font>. Three functions are imported:<a class="headerlink" href="#the-custom-module-module-basic-concepts-fixed-income-custom-module-is-accessed-from-dropbox-and-named-basic-concepts-fixed-income-three-functions-are-imported" title="Link to this heading">#</a></h4>
+<ul>
+<li><h4 class="rubric" id="bond-pay-data-chapter-three-returns-numpy-arrays-of-payment-dates-and-amounts-view-here"><font color='green'>bond_pay_data()</font> (Chapter Three) Returns NumPy arrays of payment dates and amounts. <a href='https://patrickjhess.github.io/Imported-Functions/bond_pay_data.html#'> View Here</a></h4>
+</li>
+<li><h4 class="rubric" id="check-rank-this-chapter-in-the-notebook-using-the-linalg-module-of-numpy-returns-the-truth-value-of-full-column-rank-of-a-matrix-view-here"><font color='green'>check_rank</font> (This Chapter) in the notebook <em>Using the linalg Module of NumPy</em> returns the truth value of full column rank of a matrix. <a href='https://patrickjhess.github.io/Imported-Functions/check_rank.html#check-rank-helper-function'>View Here</a></h4>
+</li>
+<li><h4 class="rubric" id="validate-dates-chapter-two-checks-for-datetime-or-date-objects-and-converts-datetime-objects-to-date-objects-view-here"><font color='green'>validate_dates</font> (Chapter Two) checks for datetime or date objects and converts datetime objects to date objects. <a href='https://patrickjhess.github.io/Imported-Functions/validate_date.html#validate-date-helper-function'> View Here</a></h4>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">basic_concepts_fixed_income</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">bond_pay_data</span><span class="p">,</span>
+                                         <span class="n">check_rank</span><span class="p">,</span>
+                                         <span class="n">validate_dates</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the URL of the Python module to be downloaded from Dropbox.</span>
+<span class="c1"># The &#39;dl=1&#39; parameter in the URL forces a direct download of the file content.</span>
+<span class="n">url</span><span class="o">=</span> <span class="s1">&#39;https://www.dropbox.com/scl/fi/4y5hjxlfphh1ngvbgo77q/</span><span class="se">\</span>
+<span class="s1">module_-basic_concepts_fixed_income.py?rlkey=6oxi7mgka42veaat79hcv8boz&amp;st=87sztshr&amp;dl=1&#39;</span>
+<span class="n">module_name</span><span class="o">=</span><span class="s1">&#39;basic_concepts_fixed_income&#39;</span>
+<span class="c1"># Send an HTTP GET request to the URL and store the server&#39;s response.</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">response</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+  <span class="c1"># Raise an exception for bad status codes (like 404 Not Found)</span>
+  <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+  <span class="n">module</span><span class="o">=</span> <span class="n">ModuleType</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+  <span class="c1">#Code contained in response.text executed</span>
+  <span class="n">exec</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">module</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+  <span class="c1"># Module added to sys</span>
+  <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">module_name</span><span class="p">]</span><span class="o">=</span><span class="n">module</span>
+<span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Error: Could not fetch module from URL. </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Error: Failed to execute or import the module. </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Now that &#39;basic_concepts_fixed_income&#39; exists in the notebook, import the specific functions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">basic_concepts_fixed_income</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">bond_pay_data</span><span class="p">,</span>
+                                         <span class="n">check_rank</span><span class="p">,</span>
+                                         <span class="n">validate_date</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="getting-the-sample-bonds">
+<h2>Getting the sample bonds<a class="headerlink" href="#getting-the-sample-bonds" title="Link to this heading">#</a></h2>
+<p><font color='black'> U.S. Treasury notes and bonds data, for settlement on January 21, 2025, was obtained from Fidelity. The Fidelity data, an Excel workbook, is downloaded from DropBox using the Panda’s <font color='green'>read_excel()</font> method.<span class="math notranslate nohighlight">\(^{2}\)</span></p>
+<p>Three arguments are passed to the method.</p>
+<ol class="arabic simple">
+<li><p>The URL address (<font color='green'>url</font>) is required.</p></li>
+<li><p>Assigning the index column is optional. The maturity dates, located in the first column, are set as the index of the DataFrame  (<font color='green'>index_col=’Maturity Date’</font>).</p></li>
+<li><p>The worksheet name defaults to the first worksheet. The worksheet’s name, ‘Fidelity Data’, is the assigned sheet (<font color='green'>sheet_name=’Fidelity Data’</font>)</p></li>
+</ol>
+<p>The <font color='green'>loc</font> is used to access the bonds with five maturity dates.</p>
+<hr class="docutils" />
+<p><span class="math notranslate nohighlight">\(^{2}\)</span> <a href='https://patrickjhess.github.io/Introduction-To-Python-For-Financial-Python/An_Introduction_To_Pandas.html#dataframes-csv-and-excel-files'>Pandas method read_excel</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define bond maturity dates as a list</span>
+<span class="n">maturity_dates</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">date</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+    <span class="n">date</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="n">date</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span>
+    <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+    <span class="n">date</span><span class="p">(</span><span class="mi">2026</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#The full file path.</span>
+<span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.dropbox.com/scl/fi/lgnaj41bt8o9sv5a63rr1/</span><span class="se">\</span>
+<span class="s1">bond_data_jan21_2025.xlsx?rlkey=twjzkcqo0g2ahvot78518ti4x&amp;st=ihc5feog&amp;dl=1&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Attempting to load data from: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1">#Load the data from Excel, using the first column as the index.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">bond_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;Maturity Date&#39;</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Fidelity Data&#39;</span><span class="p">)</span>
+    <span class="c1"># loc attribute selects bonds with the five maturity dates</span>
+    <span class="n">sample_bonds</span><span class="o">=</span><span class="n">bond_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">maturity_dates</span><span class="p">]</span>
+    <span class="c1"># Display the sample bonds.</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">sample_bonds</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ERROR: File not found.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please check that the &#39;folder&#39; and &#39;file&#39; variables are spelled correctly&#39;</span><span class="se">\</span>
+<span class="s2">&#39; and that the file exists in that location.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Attempting to load data from: https://www.dropbox.com/scl/fi/lgnaj41bt8o9sv5a63rr1/bond_data_jan21_2025.xlsx?rlkey=twjzkcqo0g2ahvot78518ti4x&amp;st=ihc5feog&amp;dl=1
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Description</th>
+      <th>Coupon</th>
+      <th>Price Bid</th>
+      <th>Price Ask</th>
+      <th>Bid Size</th>
+      <th>Ask Size</th>
+    </tr>
+    <tr>
+      <th>Maturity Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2025-02-28</th>
+      <td>UNITED STATES TREAS NOTE 1.12500% 02/28/2025</td>
+      <td>1.125</td>
+      <td>99.671</td>
+      <td>99.684</td>
+      <td>60000.0</td>
+      <td>60000.0</td>
+    </tr>
+    <tr>
+      <th>2025-02-28</th>
+      <td>UNITED STATES TREAS SER AY-2025         4.6250...</td>
+      <td>4.625</td>
+      <td>100.019</td>
+      <td>100.032</td>
+      <td>60000.0</td>
+      <td>60000.0</td>
+    </tr>
+    <tr>
+      <th>2025-02-28</th>
+      <td>UNITED STATES TREAS NOTES               2.7500...</td>
+      <td>2.750</td>
+      <td>99.837</td>
+      <td>99.852</td>
+      <td>40000.0</td>
+      <td>40000.0</td>
+    </tr>
+    <tr>
+      <th>2025-07-15</th>
+      <td>UNITED STATES TREAS SER AQ-2025         3.0000...</td>
+      <td>3.000</td>
+      <td>99.394</td>
+      <td>99.406</td>
+      <td>60000.0</td>
+      <td>60000.0</td>
+    </tr>
+    <tr>
+      <th>2025-08-31</th>
+      <td>UNITED STATES TREAS SER AC-2025         0.2500...</td>
+      <td>0.250</td>
+      <td>97.605</td>
+      <td>97.610</td>
+      <td>60000.0</td>
+      <td>60000.0</td>
+    </tr>
+    <tr>
+      <th>2025-08-31</th>
+      <td>UNITED STATES TREAS SER BG-2025         5.0000...</td>
+      <td>5.000</td>
+      <td>100.406</td>
+      <td>100.426</td>
+      <td>60000.0</td>
+      <td>60000.0</td>
+    </tr>
+    <tr>
+      <th>2025-08-31</th>
+      <td>UNITED STATES TREAS SER P-2025          2.7500...</td>
+      <td>2.750</td>
+      <td>99.070</td>
+      <td>99.094</td>
+      <td>60000.0</td>
+      <td>60000.0</td>
+    </tr>
+    <tr>
+      <th>2026-01-15</th>
+      <td>UNITED STATES TREAS SER AJ-2026         3.8750...</td>
+      <td>3.875</td>
+      <td>99.671</td>
+      <td>99.688</td>
+      <td>40000.0</td>
+      <td>40000.0</td>
+    </tr>
+    <tr>
+      <th>2026-02-28</th>
+      <td>UNITED STATES TREAS SER AY-2026         4.6250...</td>
+      <td>4.625</td>
+      <td>100.375</td>
+      <td>100.387</td>
+      <td>50000.0</td>
+      <td>50000.0</td>
+    </tr>
+    <tr>
+      <th>2026-02-28</th>
+      <td>UNITED STATES TREAS SER H-2026          2.5000...</td>
+      <td>2.500</td>
+      <td>98.109</td>
+      <td>98.122</td>
+      <td>19000.0</td>
+      <td>19000.0</td>
+    </tr>
+    <tr>
+      <th>2026-02-28</th>
+      <td>UNITED STATES TREAS SER V-2026          0.5000...</td>
+      <td>0.500</td>
+      <td>95.968</td>
+      <td>95.989</td>
+      <td>40000.0</td>
+      <td>40000.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="getting-the-payments-of-the-eleven-bonds">
+<h3>Getting the payments of the eleven bonds<a class="headerlink" href="#getting-the-payments-of-the-eleven-bonds" title="Link to this heading">#</a></h3>
+<p>The <font color='green'>bond_pay_data</font> function provides the payment dates and amounts for bonds. This information is stored in the nested list <font color='green'>payment_data</font>.  Each element in this list contains an array of payment dates and amounts.</p>
+<p>The last element of <font color='green'>payment_data</font> specifically contains the payment dates and amounts for the 0.5 coupon bond maturing on  February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 and its payment dates and amounts are presented.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The settlement date of the sample_bonds data is 1/21/2025</span>
+<span class="n">settlement</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">2025</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="c1"># payment_data created with list comprehension</span>
+<span class="c1"># Maturity and coupon are from the sample_bonds DataFrame</span>
+<span class="c1"># Each element of the payment_data is a tuple of a bond&#39;s payment dates and amounts</span>
+<span class="n">payment_data</span><span class="o">=</span><span class="p">[</span><span class="n">bond_pay_data</span><span class="p">(</span><span class="n">maturity</span><span class="p">,</span><span class="n">coupon</span><span class="p">,</span><span class="n">settlement</span><span class="p">)</span> <span class="k">for</span> <span class="n">maturity</span><span class="p">,</span><span class="n">coupon</span> <span class="ow">in</span>
+               <span class="nb">zip</span><span class="p">(</span><span class="n">sample_bonds</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">sample_bonds</span><span class="p">[</span><span class="s1">&#39;Coupon&#39;</span><span class="p">])]</span>
+
+<span class="c1"># Display the last element of payment_data</span>
+<span class="c1"># The last element of the nested list is returned</span>
+<span class="c1"># The first and last elements of the payment elements are dates and amounts respectively</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Payment Dates For 2026-02-28 0.5 bond </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">payment_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Payment Amounts For 2026-02-28 0.5 bond </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">payment_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Payment Dates For 2026-02-28 0.5 bond 
+ [datetime.date(2025, 2, 28) datetime.date(2025, 9, 2)
+ datetime.date(2026, 3, 2)]
+Payment Amounts For 2026-02-28 0.5 bond 
+ [  0.25   0.25 100.25]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The payment amounts and dates for the last bond in the sample provide an opportunity for understanding the <font color='green'>bond_pay_data</font> function. The bond matures 2/28/2026 and pays $0.50 semi-annually: \<span class="math notranslate nohighlight">\(0.25 every six months. Starting with the maturity date the &lt;font color='green'&gt;bond_pay_data&lt;/font&gt; function determines the scheduled pay dates as 2/28/2025, 8/30/21025, and 2/28/2026. Payments, however, can only be made on a business day. If a scheduled date falls on a holiday or weekend, the function assigns the next dusiness day as the payment date. The second and third scheduled dates are adjusted to 9/02/2025 and 3/02/2026, respectively.\)</span>^{3}$</p>
+<hr class="docutils" />
+<p><span class="math notranslate nohighlight">\(^{3}\)</span> View the functions <font color='green'>scheduled_pay_dates</font> <a href='https://patrickjhess.github.io/Imported-Functions/scheduled_pay_dates.html'> (here)</a> and <font color='green'>adjust_bond_pay_dates</font> <a href='(https://patrickjhess.github.io/Imported-Functions/adjust_bond_pay_dates.html)'> (here)</a> developed in Chapter 3 and used by the <font color='green'>bond_pay_data</font> function.</p>
+</section>
+<section id="determining-the-unique-payment-dates-of-the-eleven-bonds">
+<h3>Determining the unique payment dates of the eleven bonds<a class="headerlink" href="#determining-the-unique-payment-dates-of-the-eleven-bonds" title="Link to this heading">#</a></h3>
+</section>
+<section id="use-set-comprehension-to-create-a-set-of-unique-payment-dates">
+<h3>Use set comprehension to create a set of unique payment dates<a class="headerlink" href="#use-set-comprehension-to-create-a-set-of-unique-payment-dates" title="Link to this heading">#</a></h3>
+<p>Set comprehension is utilized to efficiently determine the unique payment dates, which form the columns of the payoff matrix, by automatically eliminating duplicates.<span class="math notranslate nohighlight">\(^{4}\)</span></p>
+<p>The process involves iterating through <font color='green'>payment_data</font>, a nested list containing the payment dates and amounts for each bond. For every element selected from <font color='green'>payment_data</font>, the unique payment dates of the corresponding bond (the first value of the element) are added to <font color='green'>unique_dates_set</font>.</p>
+<p>The bonds’ payment schedules are as follows:</p>
+<ul class="simple">
+<li><p><strong>Three</strong> of the eleven bonds mature on February 28, 2025, with a single payment date: February 28, 2025.</p></li>
+<li><p><strong>One</strong> bond matures on July 15, 2025, with a single payment date: July 15, 2025.</p></li>
+<li><p><strong>Three</strong> bonds mature on August 31, 2025, with two payment dates: February 28, 2025, and September 2, 2025.</p></li>
+<li><p><strong>One</strong> bond matures on January 15, 2026, with two payment dates: July 15, 2025, and January 15, 2026.</p></li>
+<li><p><strong>Three</strong> bonds mature on February 28, 2026, with three payment dates: February 28, 2025, September 2, 2025, and March 2, 2026.</p></li>
+</ul>
+<p>In total, there are five unique payment dates identified.</p>
+<hr class="docutils" />
+<p><span class="math notranslate nohighlight">\(^{4}\)</span> All elements of a set are unique. <a class="reference external" href="https://patrickjhess.github.io/Introduction-To-Python-For-Financial-Python/Sets.html#sets">A quick introduction to sets is available here.</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">unique_dates_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">pay_date</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">payment_data</span> <span class="k">for</span> <span class="n">pay_date</span> <span class="ow">in</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+<span class="n">unique_dates_set</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{datetime.date(2025, 2, 28),
+ datetime.date(2025, 7, 15),
+ datetime.date(2025, 9, 2),
+ datetime.date(2026, 1, 15),
+ datetime.date(2026, 3, 2)}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-function-unique-pay-dates">
+<h3>The function <font color='green'>unique_pay_dates</font><a class="headerlink" href="#the-function-unique-pay-dates" title="Link to this heading">#</a></h3>
+<p>The <font color='green'>unique_pay_dates</font> function is responsible for creating a dictionary from the payment data generated by <font color='green'>bond_payment_data</font>. This resulting dictionary is essential for constructing the individual payment rows for each bond.</p>
+<p>To ensure chronological order, the function first converts the set of unique dates (<font color='green'>unique_dates_set</font>) into a sorted list (<font color='green'>unique_dates_sorted</font>). The final dictionary, named <font color='green'>unique_dates</font>, is then generated from this sorted list.</p>
+<p>In the <font color='green'>unique_dates</font> dictionary, the unique dates serve as the keys, and their corresponding values are the index locations of those dates within the sorted list. This structure allows for fast retrieval of column locations using the dictionary’s <font color='green'>get</font> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unique_pay_dates</span><span class="p">(</span><span class="n">payment_data</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a dictionary mapping unique dates to a sorted index.</span>
+<span class="sd">    The unique dates are columns of the payoff matrix</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        payment_data (list): created with bond_pay_data function</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A dictionary where keys are the unique dates (sorted) and</span>
+<span class="sd">              values are their corresponding integer index (0, 1, 2...).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+  <span class="c1"># set comprehension extracts unique dates</span>
+  <span class="c1"># iterate through every element in payment_data and then through every date in element[0]</span>
+  <span class="c1"># Sets discard duplicates</span>
+  <span class="n">unique_dates_set</span> <span class="o">=</span> <span class="p">{</span><span class="n">pay_date</span> <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">payment_data</span> <span class="k">for</span> <span class="n">pay_date</span> <span class="ow">in</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+
+  <span class="c1"># Convert set to list and sort</span>
+  <span class="n">unique_dates_sorted</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">unique_dates_set</span><span class="p">))</span>
+
+  <span class="c1"># Create dictionary with unique dates as keys and index as values</span>
+  <span class="c1"># Rows of payments will be derived from the dictionary</span>
+  <span class="n">unique_dates</span><span class="o">=</span><span class="p">{</span><span class="n">unique_date</span><span class="p">:</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">unique_date</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique_dates_sorted</span><span class="p">)}</span>
+
+  <span class="k">return</span> <span class="n">unique_dates</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="application-determine-unique-payment-dates-for-four-bonds">
+<h2><font color='green'>Application: Determine unique payment dates for four bonds</font><a class="headerlink" href="#application-determine-unique-payment-dates-for-four-bonds" title="Link to this heading">#</a></h2>
+<div style="
+    border-left: 12px solid green;
+    line-height: 1.5;
+    padding: 15px">
+<br>
+Settlement date January 21$^{st}$ 2025 and semi-annual coupons.
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Maturity</p></th>
+<th class="head"><p>Coupon</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>   January 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2025</p></td>
+<td><p>   2.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>   July 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2027</p></td>
+<td><p>   0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>   February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2035</p></td>
+<td><p>   4.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>   August 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2025</p></td>
+<td><p>   5.00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>see <a class="reference external" href="https://colab.research.google.com/drive/1hSV2ArS-kEm3soW-sbIBTjWnnD3nMvkh#scrollTo=VELk0_Ht9_y2">Chapter Four Hints: Determine Unique Payment Dates</a>, and check the <a class="reference external" href="https://colab.research.google.com/drive/1hrv5WQPxxuto7jIy1I6_fdyeAyhNCLaY#scrollTo=VELk0_Ht9_y2">expected results here</a>.</p>
+</div><section id="illustrate-creating-a-row-with-february-28-th-2026-0-5-coupon-bond">
+<h3>Illustrate creating a row with February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 0.5 coupon bond.<a class="headerlink" href="#illustrate-creating-a-row-with-february-28-th-2026-0-5-coupon-bond" title="Link to this heading">#</a></h3>
+<p>For the bond with a 0.5% coupon rate, maturing on February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 (the final bond in <font color='green'>sample_bonds</font>), identify the column locations of the bond payment dates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># unique_pay_dates function is used to return a dictionary of unique dates to column_mapping</span>
+<span class="n">column_mapping</span><span class="o">=</span><span class="n">unique_pay_dates</span><span class="p">(</span><span class="n">payment_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;unique dates = &#39;</span><span class="p">,</span><span class="n">column_mapping</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;last bond dates =&#39;</span><span class="p">,</span><span class="n">payment_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<span class="c1"># dictionary get method returns the value of the key or none if key is not present</span>
+<span class="n">payment_columns</span><span class="o">=</span><span class="p">[</span><span class="n">column_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pay_date</span><span class="p">)</span> <span class="k">for</span> <span class="n">pay_date</span> <span class="ow">in</span> <span class="n">payment_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;payment columns =&#39;</span><span class="p">,</span><span class="n">payment_columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>unique dates =  {datetime.date(2025, 2, 28): 0, datetime.date(2025, 7, 15): 1, datetime.date(2025, 9, 2): 2, datetime.date(2026, 1, 15): 3, datetime.date(2026, 3, 2): 4}
+last bond dates = [datetime.date(2025, 2, 28) datetime.date(2025, 9, 2)
+ datetime.date(2026, 3, 2)]
+payment columns = [0, 2, 4]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-the-row-for-the-bond">
+<h3>Create the row for the bond<a class="headerlink" href="#create-the-row-for-the-bond" title="Link to this heading">#</a></h3>
+<p>The payment row’s length is determined by the size of the <font color='green'>column_mapping</font>. The row is initially created as a zero-filled NumPy array.</p>
+<p>The payment amounts are then assigned to the correct column locations within the row array through iteration.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the row array with zero values</span>
+<span class="n">row</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">column_mapping</span><span class="p">))</span>
+
+<span class="c1"># Iterate through the payment amounts and the column locations as a tuple</span>
+<span class="k">for</span> <span class="n">amount</span><span class="p">,</span><span class="n">column</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">payment_data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">payment_columns</span><span class="p">):</span>
+  <span class="c1"># Check column is not equal to None; i.e. column holds a value</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">column</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># If column holds a value, assign row column position the correspond payment amount</span>
+    <span class="n">row</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">=</span><span class="n">amount</span>
+<span class="n">row</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  0.25,   0.  ,   0.25,   0.  , 100.25])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-function-create-payoff-matrix">
+<h2>The function <font color='green'>create_payoff_matrix</font><a class="headerlink" href="#the-function-create-payoff-matrix" title="Link to this heading">#</a></h2>
+<ul>
+<li><h4 class="rubric" id="the-arguments-of-the-function-are">The arguments of the function are:</h4>
+<ul>
+<li><h4 class="rubric" id="the-dataframe-of-bond-data">the DataFrame of bond data</h4>
+<ul>
+<li><h4 class="rubric" id="index-is-assumed-to-be-the-maturity-date">index is assumed to be the maturity date</h4>
+</li>
+<li><h4 class="rubric" id="annual-coupon-100-assumed-to-be-the-column-coupon">annual coupon/100 assumed to be the column ‘Coupon’</h4>
+</li>
+</ul>
+</li>
+<li><h4 class="rubric" id="the-settlement-date-assumed-to-be-a-date-or-datetime-object">the settlement date assumed to be a date or datetime object.</h4>
+</li>
+</ul>
+</li>
+<li><h4 class="rubric" id="creates-the-list-payment-rows-with-payment-row-numpy-arrays-as-element">Creates the list <font color='green'>payment_rows</font> with payment row (NumPy arrays) as element.</h4>
+</li>
+<li><h4 class="rubric" id="if-at-least-one-value-of-the-payment-row-is-non-zero-the-row-is-is-appended-to-payment-rows">If at least one value of the payment row is non zero, the row is is appended to <font color='green'>payment_rows</font>.</h4>
+</li>
+<li><h4 class="rubric" id="the-array-payoff-matrix-is-created-from-the-nested-list-payment-rows">The array <font color='green'>payoff_matrix</font> is created from the nested list <font color='green'>payment_rows</font>.</h4>
+</li>
+<li><h4 class="rubric" id="if-the-payoff-matrix-is-full-rank-the-payoff-matrix-and-the-dates-of-the-columns-are-returned">If the payoff matrix is full rank, the payoff matrix and the dates of the columns are returned.</h4>
+</li>
+</ul>
+<p><strong>Purpose:</strong> This function constructs a payoff matrix from bond data, ensuring the matrix is full rank.</p>
+<p><strong>Arguments:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Bond Data DataFrame:</strong></p>
+<ul class="simple">
+<li><p>The index must represent the maturity date.</p></li>
+<li><p>The column ‘Coupon’ is assumed to contain the annual coupon rate, expressed as a decimal (i.e., annual coupon divided by 100).</p></li>
+</ul>
+</li>
+<li><p><strong>Settlement Date:</strong> Must be provided as a date or datetime object.</p></li>
+</ol>
+<p><strong>Process:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Payment Row Creation:</strong> It generates a list, <font color='green'>payment_rows</font>, where each element is a payment row (NumPy array).</p></li>
+<li><p><strong>Inclusion Criterion:</strong> A payment row is only appended to  <font color='green'>payment_rows</font> if at least one of its values is non-zero.</p></li>
+<li><p><strong>Matrix Formation:</strong> The final  <font color='green'>payoff_matrix</font> is constructed from the list <font color='green'>payment_rows</font> holding the payment-row arrays.</p></li>
+</ol>
+<p><strong>Return Value:</strong></p>
+<ul class="simple">
+<li><p>The function returns the payment amounts and the corresponding dates for its columns <em>only if</em> the generated  <font color='green'>payoff_matrix</font> is full rank.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_payoff_matrix</span><span class="p">(</span><span class="n">df_bonds</span><span class="p">,</span><span class="n">settlement</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Constructs a cash flow matrix (Payoff Matrix) for a portfolio of bonds.</span>
+
+<span class="sd">    This function iterates through a DataFrame of bonds, calculates their individual</span>
+<span class="sd">    cash flows based on maturity and coupon rate, and aligns them into a matrix</span>
+<span class="sd">    where rows represent bonds and columns represent unique payment dates.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df_bonds : pd.DataFrame</span>
+<span class="sd">        A DataFrame containing bond data.</span>
+<span class="sd">        - Index: Maturity dates (datetime-like).</span>
+<span class="sd">        - Column &#39;Coupon&#39;: Annual coupon rate (e.g., 5.0 for 5%).</span>
+<span class="sd">    settlement : datetime-like, optional</span>
+<span class="sd">        The settlement date for calculation. Cash flows before this date are ignored.</span>
+<span class="sd">        Defaults to date.today() if None.</span>
+<span class="sd">    freq : int, optional</span>
+<span class="sd">        Payment frequency per year. Must be 1 (Annual), 2 (Semi-annual),</span>
+<span class="sd">        4 (Quarterly), or 12 (Monthly). Defaults to 2.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    tuple (np.ndarray, list)</span>
+<span class="sd">        - np.ndarray: A 2D array of floats (Rows=Bonds, Cols=Dates).</span>
+<span class="sd">        - list: A sorted list of datetime.date objects corresponding to the matrix columns.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        - If inputs are invalid type.</span>
+<span class="sd">        - If a generated row contains only zeros (maturity &lt; settlement).</span>
+<span class="sd">        - If a duplicate bond (row) is detected.</span>
+<span class="sd">        - If the final matrix is not full rank (linear dependency).</span>
+
+
+<span class="sd">  &#39;&#39;&#39;</span>
+  <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+  <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+  <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span>
+  <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+
+
+  <span class="c1"># Validate inputs</span>
+
+  <span class="c1"># df_bonds</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">((</span><span class="n">df_bonds</span><span class="p">),</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;df_bonds must be a Pandas DataFrame&quot;</span><span class="p">)</span>
+  <span class="n">df_local</span><span class="o">=</span><span class="n">df_bonds</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+  <span class="c1"># Check if index (maturity dates) are timestamps</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df_local</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">):</span>
+    <span class="n">df_local</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_local</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+  <span class="c1">#settlement</span>
+  <span class="k">if</span> <span class="n">settlement</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">settlement</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="n">settlement</span><span class="o">=</span><span class="n">validate_date</span><span class="p">(</span><span class="n">settlement</span><span class="p">)</span>
+
+  <span class="c1">#freq</span>
+  <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">12</span><span class="p">]:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  your assigned </span><span class="si">{</span><span class="n">freq</span><span class="si">}</span><span class="s2"> to freq. It must be (1, 2, 4, or 12)</span><span class="se">\</span>
+<span class="s2">      </span><span class="se">\n</span><span class="s2">      semi-annual assumed (2).&quot;</span><span class="p">)</span>
+      <span class="n">freq</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="c1"># Initialize the list payment_rows</span>
+  <span class="n">payment_rows</span><span class="o">=</span><span class="p">[]</span>
+
+  <span class="c1"># Get payment data for the bonds</span>
+
+  <span class="c1"># Only consider bonds with maturities greater than the settlement date</span>
+  <span class="n">payment_data</span><span class="o">=</span><span class="p">[</span><span class="n">bond_pay_data</span><span class="p">(</span><span class="n">maturity</span><span class="p">,</span><span class="n">coupon</span><span class="p">,</span><span class="n">settlement</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">)</span> <span class="k">for</span> <span class="n">maturity</span><span class="p">,</span><span class="n">coupon</span> <span class="ow">in</span>
+               <span class="nb">zip</span><span class="p">(</span><span class="n">df_local</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">date</span><span class="p">,</span><span class="n">df_local</span><span class="p">[</span><span class="s1">&#39;Coupon&#39;</span><span class="p">])</span><span class="k">if</span> <span class="n">maturity</span><span class="o">&gt;=</span><span class="n">settlement</span><span class="p">]</span>
+
+  <span class="c1"># Calculate the unique payment dates for bond with maturities &gt;= settlement</span>
+  <span class="c1"># create_unique_function takes the list or arrays and returns a chronologically</span>
+  <span class="c1"># sorted dictionary with keys equal to unique dates and values column location</span>
+  <span class="n">column_mapping</span><span class="o">=</span><span class="n">unique_pay_dates</span><span class="p">(</span><span class="n">payment_data</span><span class="p">)</span>
+
+  <span class="c1"># Iterate through payment_data list</span>
+  <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">payment_data</span><span class="p">:</span>
+
+    <span class="c1"># initialize an array of zeros with length equal unique dates length</span>
+    <span class="n">this_row</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">column_mapping</span><span class="p">))</span>
+
+    <span class="c1"># Use dictionary get method to determine the column number of the bond&#39;s payments</span>
+    <span class="n">payment_columns</span><span class="o">=</span><span class="p">[</span><span class="n">column_mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pay_date</span><span class="p">)</span> <span class="k">for</span> <span class="n">pay_date</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">columns</span><span class="p">,</span><span class="n">payment</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">payment_columns</span><span class="p">,</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+     <span class="n">this_row</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">=</span><span class="n">payment</span>
+
+    <span class="c1"># Check if row is zero</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">this_row</span><span class="p">,</span><span class="mi">0</span><span class="p">)):</span>
+      <span class="k">if</span> <span class="n">payment_rows</span><span class="p">:</span>
+        <span class="n">last_valid</span><span class="o">=</span><span class="n">payment_rows</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">last_valid</span><span class="o">=</span><span class="kc">None</span>
+      <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;The row has no payment amounts </span><span class="si">{</span><span class="n">new_row</span><span class="si">}</span><span class="s1">, last valid row </span><span class="si">{</span><span class="n">last_valid</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">payment_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_row</span><span class="p">)</span>
+
+  <span class="c1"># Check the rank before</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">check_rank</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">payment_rows</span><span class="p">)):</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The payoff matrix is not full rank; check the DataFrame&quot;</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">payment_rows</span><span class="p">),</span><span class="nb">list</span><span class="p">(</span><span class="n">column_mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-create-payoff-matrix-function-is-demonstrated-with-the-eleven-bonds-of-the-sample-bonds-dataframe">
+<h2>The <font color='green'>create_payoff_matrix</font> function is demonstrated with the eleven bonds of the <font color='green'>sample_bonds</font> DataFrame.<a class="headerlink" href="#the-create-payoff-matrix-function-is-demonstrated-with-the-eleven-bonds-of-the-sample-bonds-dataframe" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payoffs</span><span class="p">,</span><span class="n">column_dates</span><span class="o">=</span><span class="n">create_payoff_matrix</span><span class="p">(</span><span class="n">sample_bonds</span><span class="p">,</span><span class="n">settlement</span><span class="o">=</span><span class="n">settlement</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rows of the Payoff Matrix</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="n">payoffs</span><span class="p">,</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Dates of the columns</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
+      <span class="n">column_dates</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rows of the Payoff Matrix
+ [[100.5625   0.       0.       0.       0.    ]
+ [102.3125   0.       0.       0.       0.    ]
+ [101.375    0.       0.       0.       0.    ]
+ [  0.     101.5      0.       0.       0.    ]
+ [  0.125    0.     100.125    0.       0.    ]
+ [  2.5      0.     102.5      0.       0.    ]
+ [  1.375    0.     101.375    0.       0.    ]
+ [  0.       1.9375   0.     101.9375   0.    ]
+ [  2.3125   0.       2.3125   0.     102.3125]
+ [  1.25     0.       1.25     0.     101.25  ]
+ [  0.25     0.       0.25     0.     100.25  ]] 
+ Dates of the columns
+ [datetime.date(2025, 2, 28), datetime.date(2025, 7, 15), datetime.date(2025, 9, 2), datetime.date(2026, 1, 15), datetime.date(2026, 3, 2)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="application-determine-the-payoff-matrix-for-four-bonds">
+<h2><font color='green'>Application: Determine the payoff matrix for four bonds</font><a class="headerlink" href="#application-determine-the-payoff-matrix-for-four-bonds" title="Link to this heading">#</a></h2>
+<div style="
+    border-left: 12px solid green;
+    line-height: 1.5;
+    padding: 15px">
+<br>
+Settlement date January 21$^{st}$ 2025 and semi-annual coupons.
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Maturity</p></th>
+<th class="head"><p>Coupon</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>   January 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2025</p></td>
+<td><p>   2.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>   July 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2027</p></td>
+<td><p>   0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>   February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2035</p></td>
+<td><p>   4.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>   August 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2027</p></td>
+<td><p>   5.00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>see <a class="reference external" href="https://colab.research.google.com/drive/1hSV2ArS-kEm3soW-sbIBTjWnnD3nMvkh#scrollTo=0l5pIWmmBj2N">Chapter Four Hints: Determne the payoff matrix for four bonds</a>, and check the <a class="reference external" href="https://colab.research.google.com/drive/1hrv5WQPxxuto7jIy1I6_fdyeAyhNCLaY#scrollTo=0l5pIWmmBj2N">expected results here</a>.</p>
+</div></section>
+<section id="application-is-the-payoff-matrix-full-column-rank">
+<h2><font color='green'>Application: Is the payoff matrix full column rank?</font><a class="headerlink" href="#application-is-the-payoff-matrix-full-column-rank" title="Link to this heading">#</a></h2>
+<div style="
+    border-left: 12px solid green;
+    line-height: 1.5;
+    padding: 15px">
+<br>
+Settlement date January 21$^{st}$ 2025 and semi-annual coupons.
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Maturity</p></th>
+<th class="head"><p>Coupon</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>   January 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2025</p></td>
+<td><p>   2.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>   July 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2027</p></td>
+<td><p>   1.00</p></td>
+</tr>
+<tr class="row-even"><td><p>   February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2035</p></td>
+<td><p>   4.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>   August 31<span class="math notranslate nohighlight">\(^{st}\)</span> 2027</p></td>
+<td><p>   5.00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>see <a class="reference external" href="https://colab.research.google.com/drive/1hSV2ArS-kEm3soW-sbIBTjWnnD3nMvkh#scrollTo=5p-feMDZB2zT">Chapter Four Hints: Is payoff matrix full rank</a>, and check the <a class="reference external" href="https://colab.research.google.com/drive/1hrv5WQPxxuto7jIy1I6_fdyeAyhNCLaY#scrollTo=5p-feMDZB2zT">expected results here</a>.</p>
+</div></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "PatrickJHess/Vol-3-Chap-4",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Using_the_linalg_module_of_NumPy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Using the linalg module of NumPy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Bootstrapping_The_Term_Structure_With_304_Bonds.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bootstrapping the term structure with 304 bonds</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-unique-payoff-dates-for-a-sample-of-bonds">Find unique payoff dates for a sample of bonds</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries-modules-and-functions">Importing libraries, modules, and functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-custom-module-and-importing-functions">Adding a custom module and importing functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-custom-module-module-basic-concepts-fixed-income-custom-module-is-accessed-from-dropbox-and-named-basic-concepts-fixed-income-three-functions-are-imported">The custom module <font color="green">module_basic_concepts_fixed_income</font> custom module  is accessed from Dropbox and named <font color="green">basic_concepts_fixed_income</font>. Three functions are imported:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-sample-bonds">Getting the sample bonds</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-payments-of-the-eleven-bonds">Getting the payments of the eleven bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-unique-payment-dates-of-the-eleven-bonds">Determining the unique payment dates of the eleven bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-set-comprehension-to-create-a-set-of-unique-payment-dates">Use set comprehension to create a set of unique payment dates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-unique-pay-dates">The function <font color="green">unique_pay_dates</font></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-unique-payment-dates-for-four-bonds"><font color="green">Application: Determine unique payment dates for four bonds</font></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrate-creating-a-row-with-february-28-th-2026-0-5-coupon-bond">Illustrate creating a row with February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 0.5 coupon bond.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-row-for-the-bond">Create the row for the bond</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-create-payoff-matrix">The function <font color="green">create_payoff_matrix</font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-create-payoff-matrix-function-is-demonstrated-with-the-eleven-bonds-of-the-sample-bonds-dataframe">The <font color="green">create_payoff_matrix</font> function is demonstrated with the eleven bonds of the <font color="green">sample_bonds</font> DataFrame.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-the-payoff-matrix-for-four-bonds"><font color="green">Application: Determine the payoff matrix for four bonds</font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-is-the-payoff-matrix-full-column-rank"><font color="green">Application: Is the payoff matrix full column rank?</font></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Financial Python
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Arbitrage Partners..
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
