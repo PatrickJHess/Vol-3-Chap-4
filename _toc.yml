@@ -1,0 +1,21 @@
+
+# _toc.yml
+format: jb-book
+root: intro
+parts:
+  - caption: Getting Started
+    chapters:
+    - file: Interacting With Jupyter Books
+
+  - caption: "Basic Concepts of Fixed Income: Chapter Four"
+    chapters:
+    - file: Chapter_Four_Highlights
+      sections:
+      - file: Inferring_Zero_Prices
+      - file: Using_the_linalg_module_of_NumPy
+      - file: Creating_The_Payoff_Matrix
+      - file: Bootstrapping_The_Term_Structure_With_304_Bonds
+      - file: Chapter_Four_Summary
+      - file: imported_functions_Four
+
+
