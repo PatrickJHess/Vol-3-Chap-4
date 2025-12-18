@@ -2,7 +2,7 @@
 
 ## **Volume: Basic Concepts of Fixed Income**
 
-### **Chapter Four: Bootstrapping The Term Structure Of Interest Rates**
+### **Chapter Four: Bootstrapping the Term Structure with a Few Hundred Bonds**
 
 The "bootstrapping" method determines zero prices (or present value factors) using data from 304 coupon bonds.
 

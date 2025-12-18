@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Financial Python &#8212; Basic Bond Concepts of Fixed Icome: Accrued Interest and Bond Payment Data</title>
+    <title>Financial Python &#8212; Basic Concepts of Fixed Income: Bootstrapping the Term Structure with a Few Hundred Bonds</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -152,7 +152,7 @@
   
   
   
-    <p class="title logo__title">Basic Bond Concepts of Fixed Icome: Accrued Interest and Bond Payment Data</p>
+    <p class="title logo__title">Basic Concepts of Fixed Income: Bootstrapping the Term Structure with a Few Hundred Bonds</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -355,7 +355,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volume-basic-concepts-of-fixed-income"><strong>Volume: Basic Concepts of Fixed Income</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-four-bootstrapping-the-term-structure-of-interest-rates"><strong>Chapter Four: Bootstrapping The Term Structure Of Interest Rates</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-four-bootstrapping-the-term-structure-with-a-few-hundred-bonds"><strong>Chapter Four: Bootstrapping the Term Structure with a Few Hundred Bonds</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leapfroggging-into-the-chapter"><strong>Leapfroggging into the chapter</strong></a></li>
 </ul>
 </li>
@@ -374,8 +374,8 @@ document.write(`
 <h1><strong>Financial Python</strong><a class="headerlink" href="#financial-python" title="Link to this heading">#</a></h1>
 <section id="volume-basic-concepts-of-fixed-income">
 <h2><strong>Volume: Basic Concepts of Fixed Income</strong><a class="headerlink" href="#volume-basic-concepts-of-fixed-income" title="Link to this heading">#</a></h2>
-<section id="chapter-four-bootstrapping-the-term-structure-of-interest-rates">
-<h3><strong>Chapter Four: Bootstrapping The Term Structure Of Interest Rates</strong><a class="headerlink" href="#chapter-four-bootstrapping-the-term-structure-of-interest-rates" title="Link to this heading">#</a></h3>
+<section id="chapter-four-bootstrapping-the-term-structure-with-a-few-hundred-bonds">
+<h3><strong>Chapter Four: Bootstrapping the Term Structure with a Few Hundred Bonds</strong><a class="headerlink" href="#chapter-four-bootstrapping-the-term-structure-with-a-few-hundred-bonds" title="Link to this heading">#</a></h3>
 <p>The “bootstrapping” method determines zero prices (or present value factors) using data from 304 coupon bonds.</p>
 <p>Following the fundamental concept of Chapter One, the prices of coupon bonds are assumed to be equivalent to a matching portfolio of zero-coupon bonds. Because the dataset contains more bonds than distinct maturity dates, the bootstrapping process is optimized to minimize the sum of squared differences between the actual and forecasted prices of the coupon bonds.</p>
 <p>This methodology provides a system for relative bond pricing. Taking the observed bond prices at face value, discrepancies between observed transaction prices and the prices predicted by the bootstrapping estimates signal potential return-enhancing opportunities. Specifically, investors can increase holdings in bonds where the forecasted price exceeds the actual price and reduce positions where the forecasted price is less than the actual price, assuming the bonds are traded at the observed transaction prices.</p>
@@ -449,7 +449,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#volume-basic-concepts-of-fixed-income"><strong>Volume: Basic Concepts of Fixed Income</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-four-bootstrapping-the-term-structure-of-interest-rates"><strong>Chapter Four: Bootstrapping The Term Structure Of Interest Rates</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chapter-four-bootstrapping-the-term-structure-with-a-few-hundred-bonds"><strong>Chapter Four: Bootstrapping the Term Structure with a Few Hundred Bonds</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leapfroggging-into-the-chapter"><strong>Leapfroggging into the chapter</strong></a></li>
 </ul>
 </li>
