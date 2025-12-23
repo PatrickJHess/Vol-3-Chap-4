@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -181,7 +181,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Concepts of Fixed Income: Chapter Four</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="Chapter_Four_Highlights.html">Bootstrapping The Terms Structure With A Few Hundred Bonds</a><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Chapter_Four_Highlights.html">Bootstrapping The Term Structure With A Few Hundred Bonds</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Inferring_Zero_Prices.html"><strong>Inferring zero prices from the present value function</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Using_the_linalg_module_of_NumPy.html">Using the linalg module of NumPy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Creating_The_Payoff_Matrix.html">Creating the payoff matrix</a></li>
@@ -355,7 +355,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-bond-example-recursive-solution"><strong>Two bond example-recursive solution</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-bond-example-as-two-equations-and-two-unknowns"><strong>Two bond example-as two equations and two unknowns</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-zero-coupon-bond-with-a-maturity-of-one-year-and-a-price-0f-96"><strong>Adding a zero-coupon bond with a maturity of one year and a price 0f \$96.</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-zero-coupon-bond-with-a-maturity-of-one-year-and-a-price-of-96"><strong>Adding a zero-coupon bond with a maturity of one year and a price of \$96.</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-solution"><strong>Least-Squares solution</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-result"><strong>Interpretation of the Result</strong></a></li>
 </ul>
@@ -369,14 +369,13 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <p>This is the introduction….the first pagethat users see</p>
-<section id="inferring-zero-prices-from-the-present-value-function">
+  <section id="inferring-zero-prices-from-the-present-value-function">
 <h1><strong>Inferring zero prices from the present value function</strong><a class="headerlink" href="#inferring-zero-prices-from-the-present-value-function" title="Link to this heading">#</a></h1>
 <p>The present value of a bond maturing in T periods is:</p>
 <div class="math notranslate nohighlight">
 \[\text{Bond Value} = \sum_{t=1}^{T-1}\text{PV(t)}\times \text{Coupon} + \text{PV(T)}\times (\text{Principal + Coupon})\]</div>
 <br>
-where $\text{PV(t)}$ is the present value factor at time $t$.  The present value factor at $T$ is solved for by rearranging the $Bond\ Value$ equation:
+<p>where <span class="math notranslate nohighlight">\(\text{PV(t)}\)</span> is the present value factor at time <span class="math notranslate nohighlight">\(t\)</span>.  The present value factor at <span class="math notranslate nohighlight">\(T\)</span> is solved for by rearranging the <span class="math notranslate nohighlight">\(Bond\ Value\)</span> equation:</p>
 <div class="math notranslate nohighlight">
 \[\large \text{PV(T)} = \frac{\text{Bond Value} - \sum_{t=1}^{T-1}\text{PV(t)}\times \text{Coupon}}{\text{Principal + Coupon}}\]</div>
 <br>
@@ -401,7 +400,7 @@ where $\text{PV(t)}$ is the present value factor at time $t$.  The present value
 <div class="math notranslate nohighlight">
 \[\text{PV}(1) = \frac{100 - (0.975 \times 2)}{102} = 0.9613\]</div>
 <br>
-One might initially think this recursive approach could be used to build the complete term structure. However, while straightforward, this method is not well-suited for reliably deducing the entire term structure from a set of bond prices. To understand why this approach is problematic and to develop a more effective method, we must first reframe the problem as a system of equations.
+<p>One might initially think this recursive approach could be used to build the complete term structure. However, while straightforward, this method is not well-suited for reliably deducing the entire term structure from a set of bond prices. To understand why this approach is problematic and to develop a more effective method, we must first reframe the problem as a system of equations.</p>
 </section>
 <section id="two-bond-example-as-two-equations-and-two-unknowns">
 <h2><strong>Two bond example-as two equations and two unknowns</strong><a class="headerlink" href="#two-bond-example-as-two-equations-and-two-unknowns" title="Link to this heading">#</a></h2>
@@ -410,9 +409,9 @@ One might initially think this recursive approach could be used to build the com
 <br>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(97.5 = 100\times \text{PV(0.5)}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(100 = 2\times \text{PV(0.5)} + 102\times \text{PV(1)}\)</span>
-<br></p></li>
+<li><p><span class="math notranslate nohighlight">\(100 = 2\times \text{PV(0.5)} + 102\times \text{PV(1)}\)</span></p></li>
 </ol>
+<br>
 <p>These equations can be represented in matrix form:</p>
 <br>
 <p><span class="math notranslate nohighlight">\(\text{Bond Values} = \text{Payoffs} \times \text{Zero Prices}\)</span></p>
@@ -429,63 +428,71 @@ PV(1)  \\
 <li><p><span class="math notranslate nohighlight">\(\text{Payoffs} \hspace{1.15cm}=\begin{pmatrix}
 100 &amp;0  \\
 2 &amp;102  \\
-\end{pmatrix}\)</span></p></li>
+\end{pmatrix}
+\)</span></p></li>
 </ol>
 <br>
-$\Large\begin{pmatrix}
+<p><span class="math notranslate nohighlight">\(\Large\begin{pmatrix}
 97.5  \\
 100  \\
 \end{pmatrix}= \begin{pmatrix}
-100 &0  \\
-2 &102  \\
+100 &amp;0  \\
+2 &amp;102  \\
 \end{pmatrix}
 \times\begin{pmatrix}
 PV(0.5)  \\
 PV(1)  \\
-\end{pmatrix}$
-<br><br>
+\end{pmatrix}
+\)</span></p>
+<br>
+<br>
 <p>The goal is to solve for the <span class="math notranslate nohighlight">\(\text{Zero Prices}\)</span> array. Since the <span class="math notranslate nohighlight">\(\text{Payoffs}\)</span> array is a square matrix, we can use its inverse to solve the system of equations. The inverse of the <span class="math notranslate nohighlight">\(\text{Payoffs}\)</span> matrix is:</p>
-<p><br><br>
-$<span class="math notranslate nohighlight">\(\text{Payoffs}^{-1} = \Large\begin{pmatrix}
+<br>
+<br>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Payoffs}^{-1} = \Large\begin{pmatrix}
 100 &amp;0  \\
 2 &amp;102  \\
 \end{pmatrix}^{-1} = \begin{pmatrix}
 \frac{1}{100} &amp;0  \\
 \frac{-2}{100\times 102} &amp;\frac{1}{102}  \\
-\end{pmatrix} \)</span>$
-<br><br></p>
+\end{pmatrix} \end{split}\]</div>
+<br>
+<br>
 <p>Multiplying both sides of the matrix equation by the inverse of the <span class="math notranslate nohighlight">\(\text{Payoffs}\)</span> matrix allows us to solve for the <span class="math notranslate nohighlight">\(\text{Zero Prices}\)</span>:</p>
 <br>
-$$\Large\begin{pmatrix}
-\frac{1}{100} &0  \\
-\frac{-2}{100\times 102} &\frac{1}{102}  \\
+<div class="math notranslate nohighlight">
+\[\begin{split}\Large\begin{pmatrix}
+\frac{1}{100} &amp;0  \\
+\frac{-2}{100\times 102} &amp;\frac{1}{102}  \\
 \end{pmatrix}\times\large \begin{pmatrix}
 97.5  \\
 100  \\
 \end{pmatrix}=\begin{pmatrix}
-\ 1 &0  \\
-\ 0 & 1  \\
+\ 1 &amp;0  \\
+\ 0 &amp; 1  \\
 \end{pmatrix}\times\begin{pmatrix}
 \text{PV(0.5)}  \\
 \text{PV(1)}  \\
 \end{pmatrix}
-$$
+\end{split}\]</div>
 <br>
 <p>The first zero price factor, <span class="math notranslate nohighlight">\(\text{PV(0.5)}\)</span>, is calculated by multiplying the first row of the inverse matrix into the <span class="math notranslate nohighlight">\(\text{Bond Values}\)</span> vector:
 $<span class="math notranslate nohighlight">\(
 \text{PV(0.5)} = \frac{1}{100} \times 97.5 + 0 \times 100 = \frac{97.5}{100} = 0.975
-\)</span>$
-<br></p>
+\)</span>$</p>
+<br>
 <p>The second zero price factor, <span class="math notranslate nohighlight">\(\text{PV(1)}\)</span>, is calculated by multiplying the second row of the inverse matrix into the <span class="math notranslate nohighlight">\(\text{Bond Values}\)</span> vector:<br></p>
 <br>
-$$
-PV(1) = \frac{-2}{100 \times 102} \times 97.5 + \frac{1}{102} \times 100 = \frac{100 - 2 \times PV(0.5)}{102} = \frac{100 - 2 \times 0.975}{102} = \frac{98.05}{102} \approx 0.9613$$
+<div class="math notranslate nohighlight">
+\[
+PV(1) = \frac{-2}{100 \times 102} \times 97.5 + \frac{1}{102} \times 100 = \frac{100 - 2 \times PV(0.5)}{102} = \frac{100 - 2 \times 0.975}{102} = \frac{98.05}{102} \approx 0.9613\]</div>
 <br>
-Results that are identical to the two-bond recursive solution.
+<p>Results that are identical to the two-bond recursive solution.</p>
 <br>
 </section>
-<section id="adding-a-zero-coupon-bond-with-a-maturity-of-one-year-and-a-price-0f-96">
-<h2><strong>Adding a zero-coupon bond with a maturity of one year and a price 0f \$96.</strong><a class="headerlink" href="#adding-a-zero-coupon-bond-with-a-maturity-of-one-year-and-a-price-0f-96" title="Link to this heading">#</a></h2>
+<section id="adding-a-zero-coupon-bond-with-a-maturity-of-one-year-and-a-price-of-96">
+<h2><strong>Adding a zero-coupon bond with a maturity of one year and a price of \$96.</strong><a class="headerlink" href="#adding-a-zero-coupon-bond-with-a-maturity-of-one-year-and-a-price-of-96" title="Link to this heading">#</a></h2>
 <p>We now have three equations and two unknowns.  Importantly notice that the <span class="math notranslate nohighlight">\(\text{Payoffs}\)</span> array has more rows than columns (not square or invertible).</p>
 <br>
 <ol class="arabic simple">
@@ -506,20 +513,21 @@ PV(1)  \\
 </ol>
 <br>
 <br>
-$\large\begin{pmatrix}
+<p><span class="math notranslate nohighlight">\(\large\begin{pmatrix}
 97.5  \\
 100  \\
 96   \\
 \end{pmatrix}= \begin{pmatrix}
-100 &0  \\
-2 &102  \\
-0 & 100 \\
+100 &amp;0  \\
+2 &amp;102  \\
+0 &amp; 100 \\
 \end{pmatrix}
 \times\begin{pmatrix}
 PV(1)  \\
 PV(2)  \\
-\end{pmatrix}$
-<p><br><br></p>
+\end{pmatrix}\)</span></p>
+<br>
+<br>
 <p>With three equations and two unknowns, there are three possible solutions:</p>
 <ol class="arabic simple">
 <li><p>The solution already achieved with the six-month and twelve month coupon bond.</p></li>
@@ -551,8 +559,8 @@ The transpose of the Payoffs Matrix is denoted as <span class="math notranslate 
 \end{pmatrix}\)</span><br></p></li>
 <li><p>Solve for the present value factors with the product of the inverse and original payoff matrix:<br><br>
 <span class="math notranslate nohighlight">\(\begin{pmatrix}
-10\,004 &amp; 204\\
-204 &amp; 20\,004\\
+100 &amp;2 &amp;0\\
+0 &amp; 192 &amp;100\\
 \end{pmatrix}\times\begin{pmatrix}
 97.5  \\
 100  \\
@@ -632,7 +640,7 @@ The one-year zero price (<span class="math notranslate nohighlight">\(0.9606\)</
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-bond-example-recursive-solution"><strong>Two bond example-recursive solution</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-bond-example-as-two-equations-and-two-unknowns"><strong>Two bond example-as two equations and two unknowns</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-zero-coupon-bond-with-a-maturity-of-one-year-and-a-price-0f-96"><strong>Adding a zero-coupon bond with a maturity of one year and a price 0f \$96.</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-zero-coupon-bond-with-a-maturity-of-one-year-and-a-price-of-96"><strong>Adding a zero-coupon bond with a maturity of one year and a price of \$96.</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#least-squares-solution"><strong>Least-Squares solution</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-the-result"><strong>Interpretation of the Result</strong></a></li>
 </ul>

@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -181,7 +181,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Concepts of Fixed Income: Chapter Four</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="Chapter_Four_Highlights.html">Bootstrapping The Terms Structure With A Few Hundred Bonds</a><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Chapter_Four_Highlights.html">Bootstrapping The Term Structure With A Few Hundred Bonds</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Inferring_Zero_Prices.html"><strong>Inferring zero prices from the present value function</strong></a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Using the linalg module of NumPy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Creating_The_Payoff_Matrix.html">Creating the payoff matrix</a></li>
@@ -770,7 +770,7 @@ The transposed array
 <section id="calculate-and-display-multiplying-transpose-into-original-matrix-and-into-price-matrix">
 <h3>Calculate and display multiplying transpose into original matrix and into price matrix<a class="headerlink" href="#calculate-and-display-multiplying-transpose-into-original-matrix-and-into-price-matrix" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Multiplication of the transpose of <font color='green'>payoffs_three_bonds</font> into the original payoff matrix. Using the <font color='green'>dot</font> functions.</p></li>
+<li><p>Multiplication of the transpose of <font color='green'>payoffs_three_bonds</font> into the original payoff matrix. Using the <font color='green'>dot</font> function.</p></li>
 <li><p>Multiplication of transpose of payoff matrix into the price array, <font color='green'>prices_three_bonds</font>.</p></li>
 </ul>
 <div class="cell docutils container">
@@ -784,7 +784,7 @@ The transposed array
 <span class="c1"># Use dot function to multiply transpose into prices_three_bonds</span>
 <span class="n">three_payoff_transpose_prices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">payoffs_three_bonds_transpose</span><span class="p">,</span><span class="n">prices_three_bonds</span><span class="p">)</span>
 <span class="c1"># display result</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Multiplying Transpose of payoff matrix into three boond price array </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">three_payoff_transpose_prices</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Multiplying Transpose of payoff matrix into three bond price array </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">three_payoff_transpose_prices</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -792,7 +792,7 @@ The transposed array
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multiplying Transpose of payoff matrix into payoff matrix 
  [[10004   204]
  [  204 20404]]
-Multiplying Transpose of payoff matrix into three boond price array 
+Multiplying Transpose of payoff matrix into three bond price array 
  [ 9950. 19800.]
 </pre></div>
 </div>
@@ -871,7 +871,7 @@ Column rank of payoff matrix---2
 Information content of each column--[142.85657143 100.        ]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_22970/1878391595.py:1: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_28250/1878391595.py:1: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
   least_square_pv_factors=np.linalg.lstsq(payoffs_three_bonds,prices_three_bonds)
 </pre></div>

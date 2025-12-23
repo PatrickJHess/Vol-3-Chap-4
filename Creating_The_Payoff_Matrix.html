@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -181,7 +181,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Concepts of Fixed Income: Chapter Four</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="Chapter_Four_Highlights.html">Bootstrapping The Terms Structure With A Few Hundred Bonds</a><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Chapter_Four_Highlights.html">Bootstrapping The Term Structure With A Few Hundred Bonds</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Inferring_Zero_Prices.html"><strong>Inferring zero prices from the present value function</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Using_the_linalg_module_of_NumPy.html">Using the linalg module of NumPy</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Creating the payoff matrix</a></li>
@@ -420,26 +420,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-unique-payoff-dates-for-a-sample-of-bonds">Find unique payoff dates for a sample of bonds</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries-modules-and-functions">Importing libraries, modules, and functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-custom-module-and-importing-functions">Adding a custom module and importing functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-custom-module-module-basic-concepts-fixed-income-custom-module-is-accessed-from-dropbox-and-named-basic-concepts-fixed-income-three-functions-are-imported">The custom module <font color="green">module_basic_concepts_fixed_income</font> custom module  is accessed from Dropbox and named <font color="green">basic_concepts_fixed_income</font>. Three functions are imported:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-sample-bonds">Getting the sample bonds</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-payments-of-the-eleven-bonds">Getting the payments of the eleven bonds</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-unique-payment-dates-of-the-eleven-bonds">Determining the unique payment dates of the eleven bonds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-unique-payoff-dates-for-a-sample-of-bonds">Find unique payoff dates for a sample of bonds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries-modules-and-functions">Importing libraries, modules, and functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-custom-module-and-importing-functions">Adding a custom module and importing functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-sample-bonds">Getting the sample bonds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-payments-of-the-eleven-bonds">Getting the payments of the eleven bonds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-unique-payment-dates-of-the-eleven-bonds">Determining the unique payment dates of the eleven bonds</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-set-comprehension-to-create-a-set-of-unique-payment-dates">Use set comprehension to create a set of unique payment dates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-unique-pay-dates">The function <font color="green">unique_pay_dates</font></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-unique-payment-dates-for-four-bonds"><font color="green">Application: Determine unique payment dates for four bonds</font></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrate-creating-a-row-with-february-28-th-2026-0-5-coupon-bond">Illustrate creating a row with February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 0.5 coupon bond.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-row-for-the-bond">Create the row for the bond</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-unique-pay-dates">The function <font color="green">unique_pay_dates</font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-unique-payment-dates-for-four-bonds"><font color="green">Application: Determine unique payment dates for four bonds</font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-row-for-the-bond">Create the row for the bond</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-create-payoff-matrix">The function <font color="green">create_payoff_matrix</font></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-create-payoff-matrix-function-is-demonstrated-with-the-eleven-bonds-of-the-sample-bonds-dataframe">The <font color="green">create_payoff_matrix</font> function is demonstrated with the eleven bonds of the <font color="green">sample_bonds</font> DataFrame.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-the-payoff-matrix-for-four-bonds"><font color="green">Application: Determine the payoff matrix for four bonds</font></a></li>
@@ -459,6 +451,10 @@ document.write(`
 <h1>Creating the payoff matrix<a class="headerlink" href="#creating-the-payoff-matrix" title="Link to this heading">#</a></h1>
 <section id="find-unique-payoff-dates-for-a-sample-of-bonds">
 <h2>Find unique payoff dates for a sample of bonds<a class="headerlink" href="#find-unique-payoff-dates-for-a-sample-of-bonds" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>List item</p></li>
+<li><p>List item</p></li>
+</ul>
 <p>To accurately estimate the term structure of interest rates using coupon bonds, the first step is to identify the unique payment dates for the bonds. These dates will form the columns of the payoff matrix. The rows of the matrix will represent the individual bonds, and the cell values will be the payment amount of the corresponding bond on that specific date.</p>
 <p>To demonstrate, we will use an Excel workbook named bond_data_jan21_2025.xlsx from DropBox. The payoff matrix will be constructed using all bonds that mature on the following dates</p>
 <ul class="simple">
@@ -469,8 +465,9 @@ document.write(`
 <li><p>February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026</p></li>
 </ul>
 <p>The settlement date is January 21<span class="math notranslate nohighlight">\(^{st}\)</span> 2025.</p>
+</section>
 <section id="importing-libraries-modules-and-functions">
-<h3>Importing libraries, modules, and functions<a class="headerlink" href="#importing-libraries-modules-and-functions" title="Link to this heading">#</a></h3>
+<h2>Importing libraries, modules, and functions<a class="headerlink" href="#importing-libraries-modules-and-functions" title="Link to this heading">#</a></h2>
 <p>As in earlier chapters of the volume, modules that are included in the standard Python library are imported. When necessary, other modules or libraries are installed before they are imported.<span class="math notranslate nohighlight">\(^{1}\)</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>import sys
 import requests
@@ -520,16 +517,12 @@ except:
 </div>
 </section>
 <section id="adding-a-custom-module-and-importing-functions">
-<h3>Adding a custom module and importing functions<a class="headerlink" href="#adding-a-custom-module-and-importing-functions" title="Link to this heading">#</a></h3>
-<section id="the-custom-module-module-basic-concepts-fixed-income-custom-module-is-accessed-from-dropbox-and-named-basic-concepts-fixed-income-three-functions-are-imported">
-<h4>The custom module <font color='green'>module_basic_concepts_fixed_income</font> custom module  is accessed from Dropbox and named <font color='green'>basic_concepts_fixed_income</font>. Three functions are imported:<a class="headerlink" href="#the-custom-module-module-basic-concepts-fixed-income-custom-module-is-accessed-from-dropbox-and-named-basic-concepts-fixed-income-three-functions-are-imported" title="Link to this heading">#</a></h4>
-<ul>
-<li><h4 class="rubric" id="bond-pay-data-chapter-three-returns-numpy-arrays-of-payment-dates-and-amounts-view-here"><font color='green'>bond_pay_data()</font> (Chapter Three) Returns NumPy arrays of payment dates and amounts. <a href='https://patrickjhess.github.io/Imported-Functions/bond_pay_data.html#'> View Here</a></h4>
-</li>
-<li><h4 class="rubric" id="check-rank-this-chapter-in-the-notebook-using-the-linalg-module-of-numpy-returns-the-truth-value-of-full-column-rank-of-a-matrix-view-here"><font color='green'>check_rank</font> (This Chapter) in the notebook <em>Using the linalg Module of NumPy</em> returns the truth value of full column rank of a matrix. <a href='https://patrickjhess.github.io/Imported-Functions/check_rank.html#check-rank-helper-function'>View Here</a></h4>
-</li>
-<li><h4 class="rubric" id="validate-dates-chapter-two-checks-for-datetime-or-date-objects-and-converts-datetime-objects-to-date-objects-view-here"><font color='green'>validate_dates</font> (Chapter Two) checks for datetime or date objects and converts datetime objects to date objects. <a href='https://patrickjhess.github.io/Imported-Functions/validate_date.html#validate-date-helper-function'> View Here</a></h4>
-</li>
+<h2>Adding a custom module and importing functions<a class="headerlink" href="#adding-a-custom-module-and-importing-functions" title="Link to this heading">#</a></h2>
+<p>The custom module <font color='green'>module_basic_concepts_fixed_income</font> custom module  is accessed from Dropbox and named <font color='green'>basic_concepts_fixed_income</font>. Three functions are imported:</p>
+<ul class="simple">
+<li><p><font color='green'>bond_pay_data</font> (Chapter Three) Returns NumPy arrays of payment dates and amounts. <a href='https://patrickjhess.github.io/Imported-Functions/bond_pay_data.html#'> View Here</a></p></li>
+<li><p><font color='green'>check_rank</font> (This Chapter) in the notebook <em>Using the linalg Module of NumPy</em> returns the truth value of full column rank of a matrix. <a href='https://patrickjhess.github.io/Imported-Functions/check_rank.html#check-rank-helper-function'>View Here</a></p></li>
+<li><p><font color='green'>validate_dates</font> (Chapter Two) checks for datetime or date objects and converts datetime objects to date objects. <a href='https://patrickjhess.github.io/Imported-Functions/validate_date.html#validate-date-helper-function'> View Here</a></p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">basic_concepts_fixed_income</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">bond_pay_data</span><span class="p">,</span>
                                          <span class="n">check_rank</span><span class="p">,</span>
@@ -567,11 +560,9 @@ except:
 </div>
 </div>
 </section>
-</section>
-</section>
 <section id="getting-the-sample-bonds">
 <h2>Getting the sample bonds<a class="headerlink" href="#getting-the-sample-bonds" title="Link to this heading">#</a></h2>
-<p><font color='black'> U.S. Treasury notes and bonds data, for settlement on January 21, 2025, was obtained from Fidelity. The Fidelity data, an Excel workbook, is downloaded from DropBox using the Panda’s <font color='green'>read_excel()</font> method.<span class="math notranslate nohighlight">\(^{2}\)</span></p>
+<p><font color='black'> U.S. Treasury notes and bonds data, for settlement on January 21, 2025, was obtained from Fidelity. The Fidelity data, an Excel workbook, is downloaded from DropBox using the Panda’s <font color='green'>read_excel</font> method.<span class="math notranslate nohighlight">\(^{2}\)</span></p>
 <p>Three arguments are passed to the method.</p>
 <ol class="arabic simple">
 <li><p>The URL address (<font color='green'>url</font>) is required.</p></li>
@@ -760,8 +751,9 @@ except:
 </table>
 </div></div></div>
 </div>
+</section>
 <section id="getting-the-payments-of-the-eleven-bonds">
-<h3>Getting the payments of the eleven bonds<a class="headerlink" href="#getting-the-payments-of-the-eleven-bonds" title="Link to this heading">#</a></h3>
+<h2>Getting the payments of the eleven bonds<a class="headerlink" href="#getting-the-payments-of-the-eleven-bonds" title="Link to this heading">#</a></h2>
 <p>The <font color='green'>bond_pay_data</font> function provides the payment dates and amounts for bonds. This information is stored in the nested list <font color='green'>payment_data</font>.  Each element in this list contains an array of payment dates and amounts.</p>
 <p>The last element of <font color='green'>payment_data</font> specifically contains the payment dates and amounts for the 0.5 coupon bond maturing on  February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 and its payment dates and amounts are presented.</p>
 <div class="cell docutils container">
@@ -793,13 +785,12 @@ Payment Amounts For 2026-02-28 0.5 bond
 </div>
 </div>
 </div>
-<p>The payment amounts and dates for the last bond in the sample provide an opportunity for understanding the <font color='green'>bond_pay_data</font> function. The bond matures 2/28/2026 and pays $0.50 semi-annually: \<span class="math notranslate nohighlight">\(0.25 every six months. Starting with the maturity date the &lt;font color='green'&gt;bond_pay_data&lt;/font&gt; function determines the scheduled pay dates as 2/28/2025, 8/30/21025, and 2/28/2026. Payments, however, can only be made on a business day. If a scheduled date falls on a holiday or weekend, the function assigns the next dusiness day as the payment date. The second and third scheduled dates are adjusted to 9/02/2025 and 3/02/2026, respectively.\)</span>^{3}$</p>
+<p>The payment amounts and dates for the last bond in the sample provide an opportunity for understanding the <font color='green'>bond_pay_data</font> function. The bond matures 2/28/2026 and pays \<span class="math notranslate nohighlight">\(0.50 semi-annually: \\\)</span>0.25 every six months. Starting with the maturity date the <font color='green'>bond_pay_data</font> function determines the scheduled pay dates as 2/28/2025, 8/30/21025, and 2/28/2026. Payments, however, can only be made on a business day. If a scheduled date falls on a holiday or weekend, the function assigns the next dusiness day as the payment date. The second and third scheduled dates are adjusted to 9/02/2025 and 3/02/2026, respectively.<span class="math notranslate nohighlight">\(^{3}\)</span></p>
 <hr class="docutils" />
 <p><span class="math notranslate nohighlight">\(^{3}\)</span> View the functions <font color='green'>scheduled_pay_dates</font> <a href='https://patrickjhess.github.io/Imported-Functions/scheduled_pay_dates.html'> (here)</a> and <font color='green'>adjust_bond_pay_dates</font> <a href='(https://patrickjhess.github.io/Imported-Functions/adjust_bond_pay_dates.html)'> (here)</a> developed in Chapter 3 and used by the <font color='green'>bond_pay_data</font> function.</p>
 </section>
 <section id="determining-the-unique-payment-dates-of-the-eleven-bonds">
-<h3>Determining the unique payment dates of the eleven bonds<a class="headerlink" href="#determining-the-unique-payment-dates-of-the-eleven-bonds" title="Link to this heading">#</a></h3>
-</section>
+<h2>Determining the unique payment dates of the eleven bonds<a class="headerlink" href="#determining-the-unique-payment-dates-of-the-eleven-bonds" title="Link to this heading">#</a></h2>
 <section id="use-set-comprehension-to-create-a-set-of-unique-payment-dates">
 <h3>Use set comprehension to create a set of unique payment dates<a class="headerlink" href="#use-set-comprehension-to-create-a-set-of-unique-payment-dates" title="Link to this heading">#</a></h3>
 <p>Set comprehension is utilized to efficiently determine the unique payment dates, which form the columns of the payoff matrix, by automatically eliminating duplicates.<span class="math notranslate nohighlight">\(^{4}\)</span></p>
@@ -833,8 +824,9 @@ Payment Amounts For 2026-02-28 0.5 bond
 </div>
 </div>
 </section>
+</section>
 <section id="the-function-unique-pay-dates">
-<h3>The function <font color='green'>unique_pay_dates</font><a class="headerlink" href="#the-function-unique-pay-dates" title="Link to this heading">#</a></h3>
+<h2>The function <font color='green'>unique_pay_dates</font><a class="headerlink" href="#the-function-unique-pay-dates" title="Link to this heading">#</a></h2>
 <p>The <font color='green'>unique_pay_dates</font> function is responsible for creating a dictionary from the payment data generated by <font color='green'>bond_payment_data</font>. This resulting dictionary is essential for constructing the individual payment rows for each bond.</p>
 <p>To ensure chronological order, the function first converts the set of unique dates (<font color='green'>unique_dates_set</font>) into a sorted list (<font color='green'>unique_dates_sorted</font>). The final dictionary, named <font color='green'>unique_dates</font>, is then generated from this sorted list.</p>
 <p>In the <font color='green'>unique_dates</font> dictionary, the unique dates serve as the keys, and their corresponding values are the index locations of those dates within the sorted list. This structure allows for fast retrieval of column locations using the dictionary’s <font color='green'>get</font> method.</p>
@@ -871,7 +863,6 @@ Payment Amounts For 2026-02-28 0.5 bond
 </div>
 </div>
 </section>
-</section>
 <section id="application-determine-unique-payment-dates-for-four-bonds">
 <h2><font color='green'>Application: Determine unique payment dates for four bonds</font><a class="headerlink" href="#application-determine-unique-payment-dates-for-four-bonds" title="Link to this heading">#</a></h2>
 <div style="
@@ -902,9 +893,8 @@ Settlement date January 21$^{st}$ 2025 and semi-annual coupons.
 </tbody>
 </table>
 </div>
-<p>see <a class="reference external" href="https://colab.research.google.com/drive/1hSV2ArS-kEm3soW-sbIBTjWnnD3nMvkh#scrollTo=VELk0_Ht9_y2">Chapter Four Hints: Determine Unique Payment Dates</a>, and check the <a class="reference external" href="https://colab.research.google.com/drive/1hrv5WQPxxuto7jIy1I6_fdyeAyhNCLaY#scrollTo=VELk0_Ht9_y2">expected results here</a>.</p>
-</div><section id="illustrate-creating-a-row-with-february-28-th-2026-0-5-coupon-bond">
-<h3>Illustrate creating a row with February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 0.5 coupon bond.<a class="headerlink" href="#illustrate-creating-a-row-with-february-28-th-2026-0-5-coupon-bond" title="Link to this heading">#</a></h3>
+<p>see <a class="reference external" href="https://patrickjhess.github.io/Hints-Results/Chapter_Four_Hints.html#application-determine-the-payoff-matrix-for-four-bonds">Chapter Four Hints: Determine Unique Payment Dates</a>, and check the <a class="reference external" href="https://patrickjhess.github.io/Hints-Results/Chapter_Four_Results.html#application-determine-unique-payment-dates-for-four-bonds">expected results here</a>.</p>
+</div><p>Illustrate creating a row with February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 0.5 coupon bond.</p>
 <p>For the bond with a 0.5% coupon rate, maturing on February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 (the final bond in <font color='green'>sample_bonds</font>), identify the column locations of the bond payment dates.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -929,7 +919,7 @@ payment columns = [0, 2, 4]
 </div>
 </section>
 <section id="create-the-row-for-the-bond">
-<h3>Create the row for the bond<a class="headerlink" href="#create-the-row-for-the-bond" title="Link to this heading">#</a></h3>
+<h2>Create the row for the bond<a class="headerlink" href="#create-the-row-for-the-bond" title="Link to this heading">#</a></h2>
 <p>The payment row’s length is determined by the size of the <font color='green'>column_mapping</font>. The row is initially created as a zero-filled NumPy array.</p>
 <p>The payment amounts are then assigned to the correct column locations within the row array through iteration.</p>
 <div class="cell docutils container">
@@ -954,32 +944,21 @@ payment columns = [0, 2, 4]
 </div>
 </div>
 </section>
-</section>
 <section id="the-function-create-payoff-matrix">
 <h2>The function <font color='green'>create_payoff_matrix</font><a class="headerlink" href="#the-function-create-payoff-matrix" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The arguments of the function are:</p>
 <ul>
-<li><h4 class="rubric" id="the-arguments-of-the-function-are">The arguments of the function are:</h4>
-<ul>
-<li><h4 class="rubric" id="the-dataframe-of-bond-data">the DataFrame of bond data</h4>
-<ul>
-<li><h4 class="rubric" id="index-is-assumed-to-be-the-maturity-date">index is assumed to be the maturity date</h4>
-</li>
-<li><h4 class="rubric" id="annual-coupon-100-assumed-to-be-the-column-coupon">annual coupon/100 assumed to be the column ‘Coupon’</h4>
-</li>
+<li><p>the DataFrame of bond data</p></li>
+<li><p>index is assumed to be the maturity date</p></li>
+<li><p>annual coupon/100 assumed to be the column ‘Coupon’</p></li>
+<li><p>the settlement date assumed to be a date or datetime object.</p></li>
 </ul>
 </li>
-<li><h4 class="rubric" id="the-settlement-date-assumed-to-be-a-date-or-datetime-object">the settlement date assumed to be a date or datetime object.</h4>
-</li>
-</ul>
-</li>
-<li><h4 class="rubric" id="creates-the-list-payment-rows-with-payment-row-numpy-arrays-as-element">Creates the list <font color='green'>payment_rows</font> with payment row (NumPy arrays) as element.</h4>
-</li>
-<li><h4 class="rubric" id="if-at-least-one-value-of-the-payment-row-is-non-zero-the-row-is-is-appended-to-payment-rows">If at least one value of the payment row is non zero, the row is is appended to <font color='green'>payment_rows</font>.</h4>
-</li>
-<li><h4 class="rubric" id="the-array-payoff-matrix-is-created-from-the-nested-list-payment-rows">The array <font color='green'>payoff_matrix</font> is created from the nested list <font color='green'>payment_rows</font>.</h4>
-</li>
-<li><h4 class="rubric" id="if-the-payoff-matrix-is-full-rank-the-payoff-matrix-and-the-dates-of-the-columns-are-returned">If the payoff matrix is full rank, the payoff matrix and the dates of the columns are returned.</h4>
-</li>
+<li><p>Creates the list <font color='green'>payment_rows</font> with payment row (NumPy arrays) as element.</p></li>
+<li><p>If at least one value of the payment row is non zero, the row is is appended to <font color='green'>payment_rows</font>.</p></li>
+<li><p>The array <font color='green'>payoff_matrix</font> is created from the nested list <font color='green'>payment_rows</font>.</p></li>
+<li><p>If the payoff matrix is full rank, the payoff matrix and the dates of the columns are returned.</p></li>
 </ul>
 <p><strong>Purpose:</strong> This function constructs a payoff matrix from bond data, ensuring the matrix is full rank.</p>
 <p><strong>Arguments:</strong></p>
@@ -1174,7 +1153,7 @@ Settlement date January 21$^{st}$ 2025 and semi-annual coupons.
 </tbody>
 </table>
 </div>
-<p>see <a class="reference external" href="https://colab.research.google.com/drive/1hSV2ArS-kEm3soW-sbIBTjWnnD3nMvkh#scrollTo=0l5pIWmmBj2N">Chapter Four Hints: Determne the payoff matrix for four bonds</a>, and check the <a class="reference external" href="https://colab.research.google.com/drive/1hrv5WQPxxuto7jIy1I6_fdyeAyhNCLaY#scrollTo=0l5pIWmmBj2N">expected results here</a>.</p>
+<p>see <a class="reference external" href="https://patrickjhess.github.io/Hints-Results/Chapter_Four_Hints.html#application-determine-the-payoff-matrix-for-four-bonds">Chapter Four Hints: Determne the payoff matrix for four bonds</a>, and check the <a class="reference external" href="https://patrickjhess.github.io/Hints-Results/Chapter_Four_Results.html#application-determine-the-payoff-matrix-for-four-bonds">expected results here</a>.</p>
 </div></section>
 <section id="application-is-the-payoff-matrix-full-column-rank">
 <h2><font color='green'>Application: Is the payoff matrix full column rank?</font><a class="headerlink" href="#application-is-the-payoff-matrix-full-column-rank" title="Link to this heading">#</a></h2>
@@ -1206,7 +1185,7 @@ Settlement date January 21$^{st}$ 2025 and semi-annual coupons.
 </tbody>
 </table>
 </div>
-<p>see <a class="reference external" href="https://colab.research.google.com/drive/1hSV2ArS-kEm3soW-sbIBTjWnnD3nMvkh#scrollTo=5p-feMDZB2zT">Chapter Four Hints: Is payoff matrix full rank</a>, and check the <a class="reference external" href="https://colab.research.google.com/drive/1hrv5WQPxxuto7jIy1I6_fdyeAyhNCLaY#scrollTo=5p-feMDZB2zT">expected results here</a>.</p>
+<p>see <a class="reference external" href="https://patrickjhess.github.io/Hints-Results/Chapter_Four_Hints.html#application-is-the-payoff-matrix-full-column-rank">Chapter Four Hints: Is payoff matrix full rank</a>, and check the <a class="reference external" href="https://patrickjhess.github.io/Hints-Results/Chapter_Four_Results.html#application-is-the-payoff-matrix-full-column-rank">expected results here</a>.</p>
 </div></section>
 </section>
 
@@ -1274,26 +1253,18 @@ Settlement date January 21$^{st}$ 2025 and semi-annual coupons.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-unique-payoff-dates-for-a-sample-of-bonds">Find unique payoff dates for a sample of bonds</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries-modules-and-functions">Importing libraries, modules, and functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-custom-module-and-importing-functions">Adding a custom module and importing functions</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-custom-module-module-basic-concepts-fixed-income-custom-module-is-accessed-from-dropbox-and-named-basic-concepts-fixed-income-three-functions-are-imported">The custom module <font color="green">module_basic_concepts_fixed_income</font> custom module  is accessed from Dropbox and named <font color="green">basic_concepts_fixed_income</font>. Three functions are imported:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-sample-bonds">Getting the sample bonds</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-payments-of-the-eleven-bonds">Getting the payments of the eleven bonds</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-unique-payment-dates-of-the-eleven-bonds">Determining the unique payment dates of the eleven bonds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-unique-payoff-dates-for-a-sample-of-bonds">Find unique payoff dates for a sample of bonds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-libraries-modules-and-functions">Importing libraries, modules, and functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-custom-module-and-importing-functions">Adding a custom module and importing functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-sample-bonds">Getting the sample bonds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-the-payments-of-the-eleven-bonds">Getting the payments of the eleven bonds</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-unique-payment-dates-of-the-eleven-bonds">Determining the unique payment dates of the eleven bonds</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-set-comprehension-to-create-a-set-of-unique-payment-dates">Use set comprehension to create a set of unique payment dates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-unique-pay-dates">The function <font color="green">unique_pay_dates</font></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-unique-payment-dates-for-four-bonds"><font color="green">Application: Determine unique payment dates for four bonds</font></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrate-creating-a-row-with-february-28-th-2026-0-5-coupon-bond">Illustrate creating a row with February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2026 0.5 coupon bond.</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-row-for-the-bond">Create the row for the bond</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-unique-pay-dates">The function <font color="green">unique_pay_dates</font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-unique-payment-dates-for-four-bonds"><font color="green">Application: Determine unique payment dates for four bonds</font></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-row-for-the-bond">Create the row for the bond</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-function-create-payoff-matrix">The function <font color="green">create_payoff_matrix</font></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-create-payoff-matrix-function-is-demonstrated-with-the-eleven-bonds-of-the-sample-bonds-dataframe">The <font color="green">create_payoff_matrix</font> function is demonstrated with the eleven bonds of the <font color="green">sample_bonds</font> DataFrame.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-determine-the-payoff-matrix-for-four-bonds"><font color="green">Application: Determine the payoff matrix for four bonds</font></a></li>

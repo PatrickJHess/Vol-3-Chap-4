@@ -30,7 +30,7 @@ $$\text{PV(0.5)} =\frac{97.5}{100} = 0.975$$
 
 <br>
 
-We can then use this six-month present value factor and the price of the one-year bond to infer the one-year present value factor, $\text{PV(1).}$. The one-year bond's price (\$100) must equal the present value of its two cash flows: the first coupon (\$2) and the final payment $\text{(coupon + principal=\$102).}$
+We can then use this six-month present value factor and the price of the one-year bond to infer the one-year present value factor, $\text{PV(1)}$. The one-year bond's price (\$100) must equal the present value of its two cash flows: the first coupon (\$2) and the final payment $\text{(coupon + principal=\$102).}$
 
 <br>
 
@@ -136,9 +136,8 @@ $$
 <br>
 
 The first zero price factor, $\text{PV(0.5)}$, is calculated by multiplying the first row of the inverse matrix into the $\text{Bond Values}$ vector:
-$$
-\text{PV(0.5)} = \frac{1}{100} \times 97.5 + 0 \times 100 = \frac{97.5}{100} = 0.975
-$$
+
+$$\text{PV(0.5)} = \frac{1}{100} \times 97.5 + 0 \times 100 = \frac{97.5}{100} = 0.975$$
 
 <br>
 
@@ -265,5 +264,5 @@ These estimates are the least-squares estimates, meaning they minimize the squar
 The six-month zero price ($0.97501$) is slightly higher than the value calculated using just the first two bonds.
 The one-year zero price ($0.9606$) is slightly lower than the value calculated using just the first two bonds.
 
-The least-squares technique is the standard way of incorporating as many data points (bonds) as possible.  All things the same, the more bonds the more reliable is the estimate of the term structure. We'll implement the least-square technique with functions from NumPy's linear algebra module. The notebook *NumPy linalg and using sets* of this chapter illustrates the use of the module.
+The least-squares technique is the standard way of incorporating as many data points (bonds) asfile:///home/pat/Financial_Python/Basic_Concepts_Of_Fixed_Income/Chapter_Four/_build/html/Using_the_linalg_module_of_NumPy.html possible.  All things the same, the more bonds the more reliable is the estimate of the term structure. We'll implement the least-square technique with functions from NumPy's linear algebra module. The notebook *Using the linalg module of NumPy* of this chapter illustrates the use of the module.
 

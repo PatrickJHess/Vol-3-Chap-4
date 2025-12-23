@@ -1,14 +1,17 @@
-This is the introduction....the first pagethat users see
+
 
 ## **Inferring zero prices from the present value function**
 
 The present value of a bond maturing in T periods is:
 
 $$\text{Bond Value} = \sum_{t=1}^{T-1}\text{PV(t)}\times \text{Coupon} + \text{PV(T)}\times (\text{Principal + Coupon})$$
+
 <br>
+
 where $\text{PV(t)}$ is the present value factor at time $t$.  The present value factor at $T$ is solved for by rearranging the $Bond\ Value$ equation:
 
 $$\large \text{PV(T)} = \frac{\text{Bond Value} - \sum_{t=1}^{T-1}\text{PV(t)}\times \text{Coupon}}{\text{Principal + Coupon}}$$
+
 <br>
 
 This formula allows for the recursive calculation of present value factors (zero prices), beginning with the shortest maturity and progressively solving for factors at longer maturity dates.
@@ -25,6 +28,7 @@ The present value factor for six months, $\text{PV(0.5)}$, is the ratio of the p
 <br>
 
 $$\text{PV(0.5)} =\frac{97.5}{100} = 0.975$$
+
 <br>
 
 We can then use this six-month present value factor and the price of the one-year bond to infer the one-year present value factor, $\text{PV(1).}$. The one-year bond's price (\$100) must equal the present value of its two cash flows: the first coupon (\$2) and the final payment $\text{(coupon + principal=\$102).}$
@@ -38,6 +42,7 @@ Solving for $\text{PV(1)}$:
 $$\text{PV}(1) = \frac{100 - (0.975 \times 2)}{102} = 0.9613$$
 
 <br>
+
 One might initially think this recursive approach could be used to build the complete term structure. However, while straightforward, this method is not well-suited for reliably deducing the entire term structure from a set of bond prices. To understand why this approach is problematic and to develop a more effective method, we must first reframe the problem as a system of equations.
 
 
@@ -51,6 +56,7 @@ The values of the two bonds are first expressed as a system of two linear equati
 
 1.   $97.5 = 100\times \text{PV(0.5)}$
 2.   $100 = 2\times \text{PV(0.5)} + 102\times \text{PV(1)}$
+
 <br>
 
 These equations can be represented in matrix form:
@@ -73,10 +79,11 @@ PV(1)  \\
 3.   $\text{Payoffs} \hspace{1.15cm}=\begin{pmatrix}
 100 &0  \\
 2 &102  \\
-\end{pmatrix}$   
-
+\end{pmatrix}
+$   
 
 <br>
+
 $\Large\begin{pmatrix}
 97.5  \\
 100  \\
@@ -87,12 +94,17 @@ $\Large\begin{pmatrix}
 \times\begin{pmatrix}
 PV(0.5)  \\
 PV(1)  \\
-\end{pmatrix}$
-<br><br>
+\end{pmatrix}
+$
+
+<br>
+<br>
 
 The goal is to solve for the $\text{Zero Prices}$ array. Since the $\text{Payoffs}$ array is a square matrix, we can use its inverse to solve the system of equations. The inverse of the $\text{Payoffs}$ matrix is:
 
-<br><br>
+<br>
+<br>
+
 $$\text{Payoffs}^{-1} = \Large\begin{pmatrix}
 100 &0  \\
 2 &102  \\
@@ -100,11 +112,14 @@ $$\text{Payoffs}^{-1} = \Large\begin{pmatrix}
 \frac{1}{100} &0  \\
 \frac{-2}{100\times 102} &\frac{1}{102}  \\
 \end{pmatrix} $$
-<br><br>
+
+<br>
+<br>
 
 Multiplying both sides of the matrix equation by the inverse of the $\text{Payoffs}$ matrix allows us to solve for the $\text{Zero Prices}$:
 
 <br>
+
 $$\Large\begin{pmatrix}
 \frac{1}{100} &0  \\
 \frac{-2}{100\times 102} &\frac{1}{102}  \\
@@ -126,20 +141,24 @@ The first zero price factor, $\text{PV(0.5)}$, is calculated by multiplying the 
 $$
 \text{PV(0.5)} = \frac{1}{100} \times 97.5 + 0 \times 100 = \frac{97.5}{100} = 0.975
 $$
+
 <br>
 
 The second zero price factor, $\text{PV(1)}$, is calculated by multiplying the second row of the inverse matrix into the $\text{Bond Values}$ vector:<br>
 
 
 <br>
+
 $$
 PV(1) = \frac{-2}{100 \times 102} \times 97.5 + \frac{1}{102} \times 100 = \frac{100 - 2 \times PV(0.5)}{102} = \frac{100 - 2 \times 0.975}{102} = \frac{98.05}{102} \approx 0.9613$$
 
 <br>
+
 Results that are identical to the two-bond recursive solution.
+
 <br>
 
-### **Adding a zero-coupon bond with a maturity of one year and a price 0f \\$96.**
+### **Adding a zero-coupon bond with a maturity of one year and a price of \\$96.**
 
 We now have three equations and two unknowns.  Importantly notice that the $\text{Payoffs}$ array has more rows than columns (not square or invertible).
 
@@ -165,6 +184,7 @@ PV(1)  \\
 
 <br>
 <br>
+
 $\large\begin{pmatrix}
 97.5  \\
 100  \\
@@ -179,7 +199,8 @@ PV(1)  \\
 PV(2)  \\
 \end{pmatrix}$
 
-<br><br>
+<br>
+<br>
 
 With three equations and two unknowns, there are three possible solutions:
 
@@ -215,8 +236,8 @@ $
 \end{pmatrix}$<br>
 3.  Solve for the present value factors with the product of the inverse and original payoff matrix:<br><br>
  $\begin{pmatrix}
-10\,004 & 204\\
-204 & 20\,004\\
+100 &2 &0\\
+0 & 192 &100\\
 \end{pmatrix}\times\begin{pmatrix}
 97.5  \\
 100  \\
