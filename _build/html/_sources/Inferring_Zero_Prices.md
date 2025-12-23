@@ -233,8 +233,8 @@ $
 \end{pmatrix}$<br>
 3.  Solve for the present value factors with the product of the inverse and original payoff matrix:<br><br>
  $\begin{pmatrix}
-10\,004 & 204\\
-204 & 20\,004\\
+100 &2 &0\\
+0 & 192 &100\\
 \end{pmatrix}\times\begin{pmatrix}
 97.5  \\
 100  \\
