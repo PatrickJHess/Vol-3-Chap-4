@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Bootstrapping The Terms Structure With A Few Hundred Bonds &#8212; Basic Concepts of Fixed Income: Bootstrapping the Term Structure with a Few Hundred Bonds</title>
+    <title>Bootstrapping The Term Structure With A Few Hundred Bonds &#8212; Basic Concepts of Fixed Income: Bootstrapping the Term Structure with a Few Hundred Bonds</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -181,7 +181,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Concepts of Fixed Income: Chapter Four</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Bootstrapping The Terms Structure With A Few Hundred Bonds</a><ul>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Bootstrapping The Term Structure With A Few Hundred Bonds</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Inferring_Zero_Prices.html"><strong>Inferring zero prices from the present value function</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Using_the_linalg_module_of_NumPy.html">Using the linalg module of NumPy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Creating_The_Payoff_Matrix.html">Creating the payoff matrix</a></li>
@@ -343,7 +343,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Bootstrapping The Terms Structure With A Few Hundred Bonds</h1>
+    <h1>Bootstrapping The Term Structure With A Few Hundred Bonds</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -365,8 +365,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="bootstrapping-the-terms-structure-with-a-few-hundred-bonds">
-<h1>Bootstrapping The Terms Structure With A Few Hundred Bonds<a class="headerlink" href="#bootstrapping-the-terms-structure-with-a-few-hundred-bonds" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="bootstrapping-the-term-structure-with-a-few-hundred-bonds">
+<h1>Bootstrapping The Term Structure With A Few Hundred Bonds<a class="headerlink" href="#bootstrapping-the-term-structure-with-a-few-hundred-bonds" title="Link to this heading">#</a></h1>
 <p><strong>Chapter Four of the volume Basic Concepts of Fixed Income</strong></p>
 <p><strong>Key Topics Covered</strong></p>
 <ul class="simple">
@@ -389,8 +389,8 @@ document.write(`
 </li>
 <li><p>Pandas DataFrames</p>
 <ul>
-<li><p>method <font color='green'>lread_excel</font></p></li>
-<li><p>method <font color='green'>applyl</font></p></li>
+<li><p>method <font color='green'>read_excel</font></p></li>
+<li><p>method <font color='green'>apply</font></p></li>
 </ul>
 </li>
 <li><p>Custom modules.</p>
@@ -409,7 +409,7 @@ document.write(`
 <ul class="simple">
 <li><p><strong>Pandas</strong> is introduced in <a class="reference external" href="https://patrickjhess.github.io/Introduction-To-Python-For-Financial-Python/An_Introduction_To_Pandas.html#a-quick-introduction-to-pandas"><em>A Quick Introduction to Pandas</em></a>.</p></li>
 <li><p><strong>NumPy</strong> is introduced in <a class="reference external" href="https://patrickjhess.github.io/Introduction-To-Python-For-Financial-Python/An_Introduction_To_NumPy.html#a-quick-introduction-to-numpy"><em>A Quick Introduction to NumPy</em></a>.</p></li>
-<li><p>The <font color='green'>accrued_interest</font> is imported from <a class="reference external" href="https://patrickjhess.github.io/Vol-3-Chap-2-Chap-3/Chapter_Two_Highlights.html#accrued-interest">Chapter Two</a></p></li>
+<li><p>The <font color='green'>accrued_interest</font> function is imported from <a class="reference external" href="https://patrickjhess.github.io/Vol-3-Chap-2-Chap-3/Chapter_Two_Highlights.html#accrued-interest">Chapter Two</a></p></li>
 <li><p>The <em>Using the linalg module of NumPy</em> notebook of this chapter provides examples of using the <strong>linalg</strong> module of NumPy</p></li>
 <li><p>The aptly titled notebook  <em>Creating the payoff matrix</em> notebook of this chapter develops the <font color='green'>create_payoff_matrix</font> function.</p></li>
 <li><p>Additional relevant Python concepts can be found in the introductory volume, <a class="reference external" href="https://patrickjhess.github.io/Introduction-To-Python-For-Financial-Python/intro.html"><em>Background Material: An Introduction to Python for Financial Python</em></a>, that relate to this and other chapters of <em>Basic Concepts of Fixed Income</em>.</p></li>
@@ -417,7 +417,7 @@ document.write(`
 <p><strong>The chapter includes five  sections:</strong></p>
 <ol class="arabic simple">
 <li><p><em>Inferring zero prices from the present value function</em>  demonstrates how to estimate zero prices or present value factors from a sample of bonds.</p></li>
-<li><p>The  Jupyter notebook <em>Using the linalg module of NumPy</em> illustrates the calculations of  <em>Inferring zero prices from the present value function</em>  with the <strong>l</strong>inalg module.</p></li>
+<li><p>The  Jupyter notebook <em>Using the linalg module of NumPy</em> illustrates the calculations of  <em>Inferring zero prices from the present value function</em>  with the <strong>linalg</strong> module.</p></li>
 <li><p>The  Jupyter notebook <em>Bootstrapping the term structure with 304 bonds</em>:</p>
 <ul class="simple">
 <li><p>downloads data of 304 coupon bonds from DropBox.</p></li>

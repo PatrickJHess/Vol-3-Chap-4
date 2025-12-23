@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Using the linalg module of NumPy" href="Using_the_linalg_module_of_NumPy.html" />
-    <link rel="prev" title="Bootstrapping The Terms Structure With A Few Hundred Bonds" href="Chapter_Four_Highlights.html" />
+    <link rel="prev" title="Bootstrapping The Term Structure With A Few Hundred Bonds" href="Chapter_Four_Highlights.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,7 +181,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Concepts of Fixed Income: Chapter Four</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="Chapter_Four_Highlights.html">Bootstrapping The Terms Structure With A Few Hundred Bonds</a><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Chapter_Four_Highlights.html">Bootstrapping The Term Structure With A Few Hundred Bonds</a><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#"><strong>Inferring zero prices from the present value function</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Using_the_linalg_module_of_NumPy.html">Using the linalg module of NumPy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Creating_The_Payoff_Matrix.html">Creating the payoff matrix</a></li>
@@ -392,7 +392,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[\text{PV(0.5)} =\frac{97.5}{100} = 0.975\]</div>
 <br>
-<p>We can then use this six-month present value factor and the price of the one-year bond to infer the one-year present value factor, <span class="math notranslate nohighlight">\(\text{PV(1).}\)</span>. The one-year bond’s price ($100) must equal the present value of its two cash flows: the first coupon ($2) and the final payment <span class="math notranslate nohighlight">\(\text{(coupon + principal=\$102).}\)</span></p>
+<p>We can then use this six-month present value factor and the price of the one-year bond to infer the one-year present value factor, <span class="math notranslate nohighlight">\(\text{PV(1)}\)</span>. The one-year bond’s price ($100) must equal the present value of its two cash flows: the first coupon ($2) and the final payment <span class="math notranslate nohighlight">\(\text{(coupon + principal=\$102).}\)</span></p>
 <br>
 <div class="math notranslate nohighlight">
 \[\$100 = 2 \times \text{PV}(0.5) + 102 \times \text{PV}(1)\]</div>
@@ -475,10 +475,9 @@ PV(1)  \\
 \end{pmatrix}
 \end{split}\]</div>
 <br>
-<p>The first zero price factor, <span class="math notranslate nohighlight">\(\text{PV(0.5)}\)</span>, is calculated by multiplying the first row of the inverse matrix into the <span class="math notranslate nohighlight">\(\text{Bond Values}\)</span> vector:
-$<span class="math notranslate nohighlight">\(
-\text{PV(0.5)} = \frac{1}{100} \times 97.5 + 0 \times 100 = \frac{97.5}{100} = 0.975
-\)</span>$</p>
+<p>The first zero price factor, <span class="math notranslate nohighlight">\(\text{PV(0.5)}\)</span>, is calculated by multiplying the first row of the inverse matrix into the <span class="math notranslate nohighlight">\(\text{Bond Values}\)</span> vector:</p>
+<div class="math notranslate nohighlight">
+\[\text{PV(0.5)} = \frac{1}{100} \times 97.5 + 0 \times 100 = \frac{97.5}{100} = 0.975\]</div>
 <br>
 <p>The second zero price factor, <span class="math notranslate nohighlight">\(\text{PV(1)}\)</span>, is calculated by multiplying the second row of the inverse matrix into the <span class="math notranslate nohighlight">\(\text{Bond Values}\)</span> vector:<br></p>
 <br>
@@ -586,7 +585,7 @@ PV(1)\\
 <p>These estimates are the least-squares estimates, meaning they minimize the squared difference between the actual bond prices and the prices predicted by the estimated <span class="math notranslate nohighlight">\(\text{PV(0.5)}\)</span> and <span class="math notranslate nohighlight">\(\text{PV(1)}\)</span>.
 The six-month zero price (<span class="math notranslate nohighlight">\(0.97501\)</span>) is slightly higher than the value calculated using just the first two bonds.
 The one-year zero price (<span class="math notranslate nohighlight">\(0.9606\)</span>) is slightly lower than the value calculated using just the first two bonds.</p>
-<p>The least-squares technique is the standard way of incorporating as many data points (bonds) as possible.  All things the same, the more bonds the more reliable is the estimate of the term structure. We’ll implement the least-square technique with functions from NumPy’s linear algebra module. The notebook <em>NumPy linalg and using sets</em> of this chapter illustrates the use of the module.</p>
+<p>The least-squares technique is the standard way of incorporating as many data points (bonds) asfile:///home/pat/Financial_Python/Basic_Concepts_Of_Fixed_Income/Chapter_Four/_build/html/Using_the_linalg_module_of_NumPy.html possible.  All things the same, the more bonds the more reliable is the estimate of the term structure. We’ll implement the least-square technique with functions from NumPy’s linear algebra module. The notebook <em>Using the linalg module of NumPy</em> of this chapter illustrates the use of the module.</p>
 </section>
 </section>
 
@@ -626,7 +625,7 @@ The one-year zero price (<span class="math notranslate nohighlight">\(0.9606\)</
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Bootstrapping The Terms Structure With A Few Hundred Bonds</p>
+        <p class="prev-next-title">Bootstrapping The Term Structure With A Few Hundred Bonds</p>
       </div>
     </a>
     <a class="right-next"
