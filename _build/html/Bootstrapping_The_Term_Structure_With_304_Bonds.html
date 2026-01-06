@@ -426,7 +426,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-used-to-estimate-the-term-structure">Data Used To Estimate The Term Structure</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-bonds-that-mature-on">Identifying bonds that mature On:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-bonds-that-mature-on">Identifying bonds that mature on:</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-eleven-bond-example-of-the-notebook-creating-the-payoff-matrix">The eleven bond example of the notebook <em>Creating the payoff matrix</em>.</a><ul class="nav section-nav flex-column">
@@ -756,7 +756,8 @@ except:
 </div></div></div>
 </div>
 <section id="identifying-bonds-that-mature-on">
-<h3>Identifying bonds that mature On:<a class="headerlink" href="#identifying-bonds-that-mature-on" title="Link to this heading">#</a></h3>
+<h3>Identifying bonds that mature on:<a class="headerlink" href="#identifying-bonds-that-mature-on" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
 <ul class="simple">
 <li><p>February 28<span class="math notranslate nohighlight">\(^{th}\)</span> 2025</p></li>
 <li><p>July 15<span class="math notranslate nohighlight">\(^{th}\)</span> 2025</p></li>
@@ -1329,7 +1330,7 @@ The process involves two main steps:</p>
 </section>
 <section id="use-the-lstsq-of-linalg-module-of-numpy-library">
 <h3>Use the <font color='green'>lstsq</font> of linalg module of NumPy library<a class="headerlink" href="#use-the-lstsq-of-linalg-module-of-numpy-library" title="Link to this heading">#</a></h3>
-<p>The process for calculating estimated coefficients (zero prices) using the <font color='green'>lstsq</font> function from NumPy’s linalg module is as follows:</p>
+<p>The process for calculating estimated coefficients (zero prices) using the <font color='green'>lstsq</font> function from NumPy’s linalg module is as follows:<span class="math notranslate nohighlight">\(^{1}\)</span></p>
 <ol class="arabic simple">
 <li><p><strong>Define the NumPy Array:</strong> Convert the ‘Transaction Prices’ column into a NumPy array named <font color='green'>transaction_prices</font> using the Pandas  <font color='green'>to_numpy</font> method.</p></li>
 <li><p><strong>Execute the  <font color='green'>lstsq</font> function:</strong> Call the  <font color='green'>lstsq</font> function to perform the least-squares solution. The outputs of this function are assigned to the following variables:</p>
@@ -1347,6 +1348,8 @@ The process involves two main steps:</p>
 </ul>
 </li>
 </ol>
+<hr class="docutils" />
+<p><span class="math notranslate nohighlight">\(^{1}\)</span> The NumPy data type datetime64 is used to calculate <font color='green'>maturity_years</font>.  After converting the column and settlement dates to datetime64, the differences are converted to floating points with the <font color='green'>astype</font> method and divided by 365.25. <a class="reference external" href="https://patrickjhess.github.io/Introduction-To-Python-For-Financial-Python/Manipulating_Dates.html#numpy-datetime64-object">See Manipulating Dates</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate transaction prices</span>
@@ -1355,8 +1358,10 @@ The process involves two main steps:</p>
 <span class="c1"># Estimate the present value factors with least squares</span>
 <span class="n">zero_prices_11</span><span class="p">,</span><span class="n">ss2_11</span><span class="p">,</span><span class="n">rank_11</span><span class="p">,</span><span class="n">colInfo__11</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">payoffs_11</span><span class="p">,</span><span class="n">transaction_prices</span><span class="p">)</span>
 
-<span class="c1"># Maturity of the bonds in years</span>
-<span class="n">maturity_years</span><span class="o">=</span><span class="p">[(</span><span class="n">mat_date</span><span class="o">-</span><span class="n">settlement</span><span class="p">)</span><span class="o">.</span><span class="n">days</span><span class="o">/</span><span class="mi">365</span> <span class="k">for</span> <span class="n">mat_date</span> <span class="ow">in</span> <span class="n">column_dates_11</span><span class="p">]</span>
+<span class="c1"># vectorize calculuation of maturity in years with NumPy</span>
+<span class="c1"># Maturity of the bonds in years..convert date object to NumPy datetime64</span>
+<span class="n">maturity_years</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">column_dates_11</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[D]&#39;</span><span class="p">)</span><span class="o">-</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">settlement</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">/</span><span class="mf">365.25</span>
 
 <span class="c1"># Continuously compounded annualized spot rates</span>
 <span class="n">spot_rates_11</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">zero_prices_11</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">maturity_years</span><span class="p">)</span>
@@ -1387,7 +1392,7 @@ The process involves two main steps:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_28184/4195404125.py:5: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11377/3266367903.py:5: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
   zero_prices_11,ss2_11,rank_11,colInfo__11=np.linalg.lstsq(payoffs_11,transaction_prices)
 </pre></div>
@@ -1419,32 +1424,32 @@ To use the future default and silence this warning we advise to pass `rcond=None
     <tr>
       <th>2025-02-28</th>
       <td>0.995580</td>
-      <td>0.042547</td>
+      <td>0.042576</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2025-07-15</th>
       <td>0.979800</td>
-      <td>0.042562</td>
-      <td>0.042566</td>
+      <td>0.042591</td>
+      <td>0.042596</td>
     </tr>
     <tr>
       <th>2025-09-02</th>
       <td>0.974662</td>
-      <td>0.041819</td>
-      <td>0.039166</td>
+      <td>0.041848</td>
+      <td>0.039193</td>
     </tr>
     <tr>
       <th>2026-01-15</th>
       <td>0.959856</td>
-      <td>0.041656</td>
-      <td>0.041386</td>
+      <td>0.041685</td>
+      <td>0.041414</td>
     </tr>
     <tr>
       <th>2026-03-02</th>
       <td>0.954456</td>
-      <td>0.042010</td>
-      <td>0.044773</td>
+      <td>0.042039</td>
+      <td>0.044804</td>
     </tr>
   </tbody>
 </table>
@@ -1533,9 +1538,10 @@ To use the future default and silence this warning we advise to pass `rcond=None
 <span class="c1"># Estimate the present value factors with least squares</span>
 <span class="n">zero_prices_304</span><span class="p">,</span><span class="n">ss2_304</span><span class="p">,</span><span class="n">rank_304</span><span class="p">,</span><span class="n">colInfo_304</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">payoffs_304</span><span class="p">,</span><span class="n">transaction_prices</span><span class="p">)</span>
 
-<span class="c1"># Maturity of the bonds in years</span>
-<span class="n">maturity_years</span><span class="o">=</span><span class="p">[(</span><span class="n">mat_date</span><span class="o">-</span><span class="n">settlement</span><span class="p">)</span><span class="o">.</span><span class="n">days</span><span class="o">/</span><span class="mf">365.25</span> <span class="k">for</span> <span class="n">mat_date</span> <span class="ow">in</span> <span class="n">column_dates_304</span><span class="p">]</span>
-
+<span class="c1"># Vectorize calculuation of maturity in years with NumPy</span>
+<span class="c1"># Maturity of the bonds in years..convert date object to NumPy datetime64</span>
+<span class="n">maturity_years</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">column_dates_304</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[D]&#39;</span><span class="p">)</span><span class="o">-</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">settlement</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span><span class="o">/</span><span class="mf">365.25</span>
 
 <span class="c1"># Continuously compounded annualized spot rates</span>
 <span class="n">spot_rates_304</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">zero_prices_304</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">maturity_years</span><span class="p">)</span>
@@ -1567,7 +1573,7 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_28184/3492082812.py:21: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11377/2756952628.py:21: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
   zero_prices_304,ss2_304,rank_304,colInfo_304=np.linalg.lstsq(payoffs_304,transaction_prices)
 </pre></div>
@@ -1945,7 +1951,7 @@ Calculate the forward rates for the following dates.
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-used-to-estimate-the-term-structure">Data Used To Estimate The Term Structure</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-bonds-that-mature-on">Identifying bonds that mature On:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-bonds-that-mature-on">Identifying bonds that mature on:</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-eleven-bond-example-of-the-notebook-creating-the-payoff-matrix">The eleven bond example of the notebook <em>Creating the payoff matrix</em>.</a><ul class="nav section-nav flex-column">
