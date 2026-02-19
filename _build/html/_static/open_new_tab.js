@@ -1,21 +1,28 @@
 // _static/open_new_tab.js
 (function() {
     "use strict";
-    window.addEventListener('load', function() {
-        // Grab the repo name (e.g., "Financial_Python")
+    var fixLinks = function() {
+        // Identify which book we are currently in
         var currentRepo = window.location.pathname.split('/').filter(Boolean)[0];
-
-        document.querySelectorAll('a').forEach(function(link) {
-            if (link.hostname && link.hostname === window.location.hostname) {
+        
+        var links = document.getElementsByTagName('a');
+        for (var i = 0; i < links.length; i++) {
+            var link = links[i];
+            if (link.hostname) {
                 var linkRepo = link.pathname.split('/').filter(Boolean)[0];
-                // New tab if the repo name in the URL is different
-                if (linkRepo && linkRepo !== currentRepo) {
+                
+                // NEW TAB IF: Different domain OR different repo folder
+                if (link.hostname !== window.location.hostname || (linkRepo && linkRepo !== currentRepo)) {
                     link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
                 }
-            } else if (link.hostname && link.hostname !== window.location.hostname) {
-                // External links (Google, etc)
-                link.target = '_blank';
             }
-        });
-    });
+        }
+    };
+
+    // Execute immediately as the script loads
+    fixLinks();
+    
+    // Backup: Execute when the DOM is fully parsed
+    document.addEventListener("DOMContentLoaded", fixLinks);
 })();

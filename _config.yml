@@ -39,13 +39,15 @@ launch_buttons:
 
 sphinx:
   config:
-    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     html_static_path: ['_static']
-    html_js_files: ['open_new_tab.js']
-  thebe_config:
-    selector: ".thebe,.cell"
-    repository_url: "https://github.com/accountname/repo_name"
-    repository_branch: "master"
+    html_js_files:
+      # The 'priority: 200' helps move this script above the Thebe injection
+      - ['open_new_tab.js', {priority: 200}]
+    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    thebe_config:
+      selector: ".thebe,.cell"
+      repository_url: "https://github.com/patrickjhess/Vol-3-Chap-4"
+      repository_branch: "master"
 parse:
   myst_enable_extensions:
     - amsmath
