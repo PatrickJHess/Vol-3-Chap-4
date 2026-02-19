@@ -33,7 +33,7 @@ repository:
 html:
   use_issues_button: true
 launch_buttons:
-  thebe: false
+  thebe: true
   colab_url: "https://colab.research.google.com"
   binderhub_url: "https://mybinder.org"
 
@@ -42,7 +42,10 @@ sphinx:
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
     html_static_path: ['_static']
     html_js_files: ['open_new_tab.js']
-
+  thebe_config:
+    selector: ".thebe,.cell"
+    repository_url: "https://github.com/accountname/repo_name"
+    repository_branch: "master"
 parse:
   myst_enable_extensions:
     - amsmath
