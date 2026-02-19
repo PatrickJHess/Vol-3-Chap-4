@@ -33,7 +33,7 @@ repository:
 html:
   use_issues_button: true
 launch_buttons:
-  thebe: true
+  thebe: false
   colab_url: "https://colab.research.google.com"
   binderhub_url: "https://mybinder.org"
 
