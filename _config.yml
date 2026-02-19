@@ -40,6 +40,8 @@ launch_buttons:
 sphinx:
   config:
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    html_static_path: ['_static']
+    html_js_files: ['open_new_tab.js']
 
 parse:
   myst_enable_extensions:
