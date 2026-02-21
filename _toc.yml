@@ -12,10 +12,23 @@ parts:
     - file: Chapter_Four_Highlights
       sections:
       - file: Inferring_Zero_Prices
-      - file: Using_the_linalg_module_of_NumPy
+      - file: Using_the_linalg_module_of_NumP
       - file: Creating_The_Payoff_Matrix
       - file: Bootstrapping_The_Term_Structure_With_304_Bonds
       - file: Chapter_Four_Summary
       - file: imported_functions_Four
+  - caption: Other Chapters in Basic Concepts Of Fixed Income
+    chapters:
+    - url: https://patrickjhess.github.io/Vol-3-Chap-1/
+      title: "Chapter One: Basic Bond Concepts and the Term Structure of Interest Rates"
+    - url: https://patrickjhess.github.io/Vol-3-Chap-2-Chap-3/
+      title: "Chapters Two and Three: Accrued Interest and Bond Pay Data"
+    - url: https://patrickjhess.github.io/Vol-3-Chap-5/
+      title: "Chapter Five: Par Yields"
+    - url: https://patrickjhess.github.io/Vol-3-Chap-6/
+      title: "Chapter Six: Yield To Maturity"
+    - url: https://patrickjhess.github.io/Vol-3-Chap-7/
+      title: "Chapter Seven: Measuring Interest Rate Risk With Duration"
+
 
 
