@@ -17,8 +17,10 @@ parts:
       - file: Bootstrapping_The_Term_Structure_With_304_Bonds
       - file: Chapter_Four_Summary
       - file: imported_functions_Four
-  - caption: Other Chapters in Basic Concepts Of Fixed Income
+  - caption: Hub & Other Chapters Of Basic Concepts Of Fixed Income
     chapters:
+    - url: https://patrickjhess.github.io/Volume-Three-Hub/
+      title: "Hub For Basic Concepts Of Fixed Income"
     - url: https://patrickjhess.github.io/Vol-3-Chap-1/
       title: "Chapter One: Basic Bond Concepts and the Term Structure of Interest Rates"
     - url: https://patrickjhess.github.io/Vol-3-Chap-2-Chap-3/
