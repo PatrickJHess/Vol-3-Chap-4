@@ -1,8 +1,8 @@
-# **Financial Python**
+# Financial Python
 
-## **Volume: Basic Concepts of Fixed Income**
+## Volume: Basic Concepts of Fixed Income
 
-### **Chapter Four: Bootstrapping the Term Structure with a Few Hundred Bonds**
+### Chapter Four: Bootstrapping the Term Structure with a Few Hundred Bonds
 
 The "bootstrapping" method determines zero prices (or present value factors) using data from 304 coupon bonds.
 
@@ -12,7 +12,7 @@ This methodology provides a system for relative bond pricing. Taking the observe
 
 Beyond portfolio rebalancing, these bootstrapping estimates have broader applications. As the next chapter will detail, they are used to estimate the required coupon rates for new debt issues, known as par yields. These par yields are valuable to issuers needing to estimate their cost of debt; a company might estimate its debt cost by adding an anticipated spread to the current par yield for debt of the same maturity. Similarly, the bootstrapped values can be used to price other instruments or to compare fixed and floating rate agreements—and many other calculations dependent upon capital market conditions.
 
-### **Leapfroggging into the chapter**
+### Leapfroggging into the chapter
 
 Although Chapters One, Two, and Three introduce concepts and calculations related to this chapter, a prior understanding of the earlier material is not strictly necessary.
 
